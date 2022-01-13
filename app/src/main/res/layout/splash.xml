@@ -15,18 +15,22 @@
     android:layout_marginRight="30dp"
     android:layout_marginTop="100dp"
     android:layout_marginBottom="100dp"
+
     android:background="@drawable/splashbackground"
    >
 
     <ImageView
         android:id="@+id/icon"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="437dp"
+        android:layout_height="400dp"
+        android:rotation="-90"
+        android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_baseline_camera_alt_24"
+        android:src="@drawable/ic_bigappicon"
+
         />
 
     <TextView
@@ -36,10 +40,11 @@
         android:text="Good Merchant"
         android:textColor="@color/textColor"
         android:id="@+id/Appname"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="260dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/icon" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <ProgressBar
         android:id="@+id/progressBar"
