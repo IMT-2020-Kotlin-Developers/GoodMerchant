@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/WinterProject/GoodMerchant/app/src/main/res/drawable/splashbackground.xml" value="0.2911458333333333" />
+        <entry key="..\:/WinterProject/GoodMerchant/app/src/main/res/layout/introfirst.xml" value="0.2246376811594203" />
+        <entry key="..\:/WinterProject/GoodMerchant/app/src/main/res/layout/introsecond.xml" value="0.2246376811594203" />
         <entry key="..\:/WinterProject/GoodMerchant/app/src/main/res/layout/splash.xml" value="0.1539855072463768" />
       </map>
     </option>
