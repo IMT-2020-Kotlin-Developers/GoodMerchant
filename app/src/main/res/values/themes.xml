@@ -16,5 +16,7 @@
     <style name="progressBar">
         <item name="colorSecondary">@color/textColor</item>
     </style>
-
+    <style name="switch1">
+        <item name="colorControlActivated">@color/textColor</item>
+    </style>
 </resources>

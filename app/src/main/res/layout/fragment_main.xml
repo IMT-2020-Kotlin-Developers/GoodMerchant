@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fillViewport="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background"
+    tools:context=".MainFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="120dp"
+        android:orientation="vertical"
+        android:background="@drawable/mainscreenfirst">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/mainscreensecond"
+            >
+           <LinearLayout
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:layout_marginTop="40dp"
+               android:layout_gravity="center">
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:hint="Search By text"
+                android:textColor="@color/black"
+                android:background="@drawable/searchbar2"/>
+               <ImageView
+                   android:layout_width="30dp"
+                   android:layout_height="40dp"
+                   android:src="@drawable/search_icon"
+                   android:background="@drawable/searchbar3"/>
+           </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="60dp"
+
+                android:layout_gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_camera_alt_24"
+                    android:layout_marginEnd="50dp"
+                    android:background="@drawable/searchbar"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_view_carousel_24"
+                        android:background="@drawable/searchbar"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="60dp"
+                android:layout_gravity="center"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+
+                android:orientation="horizontal">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Image Has Text  >"
+    android:layout_marginEnd="20dp"
+    android:layout_marginStart="25dp"
+    android:textSize="20dp"
+    android:textColor="@color/textColor"/>
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleX="1.2"
+                android:scaleY="1.2"
+               style="@style/switch1"
+               />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
