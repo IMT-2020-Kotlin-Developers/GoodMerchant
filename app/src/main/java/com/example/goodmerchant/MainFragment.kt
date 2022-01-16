@@ -8,13 +8,13 @@ import android.view.ViewGroup
 import com.example.goodmerchant.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
-lateinit var binding : FragmentMainBinding
+    lateinit var binding: FragmentMainBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
-          binding  = FragmentMainBinding.inflate(layoutInflater,container,false)
+        binding = FragmentMainBinding.inflate(layoutInflater, container, false)
 
         return binding.root
     }
