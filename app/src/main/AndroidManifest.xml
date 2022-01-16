@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GoodMerchant">
         <activity
+            android:name=".IntroScreen2"
+            android:exported="false" />
+        <activity
+            android:name=".IntroScreen1"
+            android:exported="false" />
+        <activity
             android:name=".SplashScreen"
             android:exported="true">
             <intent-filter>
@@ -18,12 +24,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
     </application>
 
 </manifest>

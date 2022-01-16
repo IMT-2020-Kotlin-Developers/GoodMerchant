@@ -3,11 +3,33 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< Updated upstream
         <entry key="..\:/Users/pande/Desktop/My Android Projects/GoodMerchant/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/pande/Desktop/My Android Projects/GoodMerchant/app/src/main/res/layout/fragment_main.xml" value="0.16" />
         <entry key="..\:/Users/pande/Desktop/My Android Projects/GoodMerchant/app/src/main/res/layout/introfirst.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/pande/Desktop/My Android Projects/GoodMerchant/app/src/main/res/layout/introsecond.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/pande/Desktop/My Android Projects/GoodMerchant/app/src/main/res/layout/splash.xml" value="0.12760416666666666" />
+=======
+        <entry key="..\:/GoodMerchant/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2703125" />
+        <entry key="..\:/GoodMerchant/app/src/main/res/drawable/ic_baseline_camera_alt_24.xml" value="0.2703125" />
+        <entry key="..\:/GoodMerchant/app/src/main/res/drawable/ic_baseline_view_carousel_24.xml" value="0.2703125" />
+        <entry key="..\:/GoodMerchant/app/src/main/res/drawable/ic_bigappicon.xml" value="0.2703125" />
+        <entry key="..\:/GoodMerchant/app/src/main/res/drawable/ic_intro1image.xml" value="0.2703125" />
+        <entry key="..\:/GoodMerchant/app/src/main/res/drawable/ic_intro2image.xml" value="0.2703125" />
+        <entry key="..\:/GoodMerchant/app/src/main/res/drawable/ic_intro2layout.xml" value="0.2703125" />
+        <entry key="..\:/GoodMerchant/app/src/main/res/drawable/mainscreenfirst.xml" value="0.2703125" />
+        <entry key="..\:/GoodMerchant/app/src/main/res/drawable/mainscreensecond.xml" value="0.2703125" />
+        <entry key="..\:/GoodMerchant/app/src/main/res/drawable/search_icon.xml" value="0.2703125" />
+        <entry key="..\:/GoodMerchant/app/src/main/res/drawable/searchbar.xml" value="0.2703125" />
+        <entry key="..\:/GoodMerchant/app/src/main/res/drawable/searchbar2.xml" value="0.2703125" />
+        <entry key="..\:/GoodMerchant/app/src/main/res/drawable/searchbar3.xml" value="0.2703125" />
+        <entry key="..\:/GoodMerchant/app/src/main/res/drawable/splashbackground.xml" value="0.2703125" />
+        <entry key="..\:/GoodMerchant/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/GoodMerchant/app/src/main/res/layout/fragment_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/GoodMerchant/app/src/main/res/layout/introfirst.xml" value="0.25416666666666665" />
+        <entry key="..\:/GoodMerchant/app/src/main/res/layout/introsecond.xml" value="0.25416666666666665" />
+        <entry key="..\:/GoodMerchant/app/src/main/res/layout/splash.xml" value="0.25416666666666665" />
+>>>>>>> Stashed changes
         <entry key="..\:/WinterProject/GoodMerchant/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2911458333333333" />
         <entry key="..\:/WinterProject/GoodMerchant/app/src/main/res/drawable/Merchanticon_background.xml" value="0.2911458333333333" />
         <entry key="..\:/WinterProject/GoodMerchant/app/src/main/res/drawable/app_icon.xml" value="0.2911458333333333" />
