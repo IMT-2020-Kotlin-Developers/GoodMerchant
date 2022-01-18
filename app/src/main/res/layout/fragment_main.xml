@@ -67,7 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/searchbar"
-                    android:src="@drawable/ic_baseline_view_carousel_24" />
+                    android:src="@drawable/ic_logogallery" />
             </LinearLayout>
 
             <LinearLayout
@@ -81,19 +81,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginEnd="10dp"
                     android:text="Image Has Text  >"
                     android:textColor="@color/textColor"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <Switch
                     android:id="@+id/switch1"
                     style="@style/switch1"
-                    android:layout_width="56dp"
+                    android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:scaleX="1.2"
-                    android:scaleY="1.2" />
+                    android:scaleX="1"
+                    android:scaleY="1" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
