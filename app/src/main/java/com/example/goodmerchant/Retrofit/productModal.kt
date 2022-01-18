@@ -5,5 +5,6 @@ data class productModal(
     val link : String,
     val price :String,
     val rating : String,
-    val thumbnail : String
+    val thumbnail : String,
+    val source : String
 )

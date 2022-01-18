@@ -13,7 +13,6 @@ interface productInterface {
     @GET("search.json?api_key=$API_KEY&engine=google&location=Austin%2C+Texas%2C+United+States&google_domain=google.com&gl=us&hl=en&tbm=shop")
     fun getProduct(
         @Query("q") q : String
-
     ) : Call<serpApiResult>
 }
 object productService{
