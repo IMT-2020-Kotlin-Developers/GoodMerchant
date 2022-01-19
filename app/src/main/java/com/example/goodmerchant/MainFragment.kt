@@ -21,14 +21,18 @@ class MainFragment : Fragment() {
     ): View {
 
         binding = FragmentMainBinding.inflate(layoutInflater, container, false)
-        binding.camera.setOnClickListener {
+
+        binding.searchicon.setOnClickListener {
+            if(binding.searchtext.text != null){
             getProducts()
+            }
         }
         return binding.root
     }
 
     private fun getProducts() {
-        val products = productService.productInstance.getProduct("mouse")
+        val search = binding.searchtext.text.toString()
+        val products = productService.productInstance.getProduct(search)
         products.enqueue(object : Callback<serpApiResult> {
             override fun onResponse(call: Call<serpApiResult>, response: Response<serpApiResult>) {
                 val productlist: serpApiResult? = response.body()
@@ -38,7 +42,7 @@ class MainFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<serpApiResult>, t: Throwable) {
-                Log.d("@@@@", "Failed sharam aatti hau?", t)
+                Log.d("@@@@", "Failed sharam ati hai?", t)
             }
         })
     }

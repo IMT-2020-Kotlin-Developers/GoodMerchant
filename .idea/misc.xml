@@ -3,11 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/pande/Desktop/My Android Projects/GoodMerchant/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/pande/Desktop/My Android Projects/GoodMerchant/app/src/main/res/layout/fragment_main.xml" value="0.16" />
-        <entry key="..\:/Users/pande/Desktop/My Android Projects/GoodMerchant/app/src/main/res/layout/introfirst.xml" value="0.13020833333333334" />
-        <entry key="..\:/Users/pande/Desktop/My Android Projects/GoodMerchant/app/src/main/res/layout/introsecond.xml" value="0.13020833333333334" />
-        <entry key="..\:/Users/pande/Desktop/My Android Projects/GoodMerchant/app/src/main/res/layout/splash.xml" value="0.12760416666666666" />
         <entry key="..\:/WinterProject/GoodMerchant/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2911458333333333" />
         <entry key="..\:/WinterProject/GoodMerchant/app/src/main/res/drawable/Merchanticon_background.xml" value="0.2911458333333333" />
         <entry key="..\:/WinterProject/GoodMerchant/app/src/main/res/drawable/app_icon.xml" value="0.2911458333333333" />
@@ -16,6 +11,7 @@
         <entry key="..\:/WinterProject/GoodMerchant/app/src/main/res/drawable/ic_baseline_view_carousel_24.xml" value="0.2866666666666667" />
         <entry key="..\:/WinterProject/GoodMerchant/app/src/main/res/drawable/ic_bigappicon.xml" value="0.2911458333333333" />
         <entry key="..\:/WinterProject/GoodMerchant/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2911458333333333" />
+        <entry key="..\:/WinterProject/GoodMerchant/app/src/main/res/drawable/ic_logogallery.xml" value="0.2861111111111111" />
         <entry key="..\:/WinterProject/GoodMerchant/app/src/main/res/drawable/mainscreenfirst.xml" value="0.2866666666666667" />
         <entry key="..\:/WinterProject/GoodMerchant/app/src/main/res/drawable/mainscreensecond.xml" value="0.2866666666666667" />
         <entry key="..\:/WinterProject/GoodMerchant/app/src/main/res/drawable/search_icon.xml" value="0.2866666666666667" />
@@ -23,8 +19,10 @@
         <entry key="..\:/WinterProject/GoodMerchant/app/src/main/res/drawable/searchbar2.xml" value="0.2866666666666667" />
         <entry key="..\:/WinterProject/GoodMerchant/app/src/main/res/drawable/searchbar3.xml" value="0.2866666666666667" />
         <entry key="..\:/WinterProject/GoodMerchant/app/src/main/res/drawable/splashbackground.xml" value="0.2911458333333333" />
+        <entry key="..\:/WinterProject/GoodMerchant/app/src/main/res/layout/activity_intro_screen1.xml" value="0.21784420289855072" />
         <entry key="..\:/WinterProject/GoodMerchant/app/src/main/res/layout/activity_main.xml" value="0.22010869565217392" />
         <entry key="..\:/WinterProject/GoodMerchant/app/src/main/res/layout/fragment_main.xml" value="0.22010869565217392" />
+        <entry key="..\:/WinterProject/GoodMerchant/app/src/main/res/layout/intro_first.xml" value="0.21784420289855072" />
         <entry key="..\:/WinterProject/GoodMerchant/app/src/main/res/layout/introfirst.xml" value="0.2246376811594203" />
         <entry key="..\:/WinterProject/GoodMerchant/app/src/main/res/layout/introsecond.xml" value="0.2246376811594203" />
         <entry key="..\:/WinterProject/GoodMerchant/app/src/main/res/layout/splash.xml" value="0.1539855072463768" />
@@ -34,7 +32,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -33,6 +33,7 @@
                 android:orientation="horizontal">
 
                 <EditText
+                    android:id="@+id/searchtext"
                     android:layout_width="200dp"
                     android:layout_height="48dp"
                     android:background="@drawable/searchbar2"
@@ -41,6 +42,7 @@
                     android:textColorHint="@color/textColor" />
 
                 <ImageView
+                    android:id="@+id/searchicon"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="@drawable/searchbar3"
