@@ -16,7 +16,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.goodmerchant.Retrofit.*
 import com.example.goodmerchant.databinding.FragmentMainBinding
 import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.label.ImageLabeling
+import com.google.mlkit.vision.label.defaults.ImageLabelerOptions
 import com.google.mlkit.vision.text.TextRecognition
+import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -55,7 +58,7 @@ class MainFragment : Fragment() {
             if(c==2)
                 pickImage()
             else
-                Toast.makeText(requireActivity(), "Turn on Switch for image with text", Toast.LENGTH_SHORT).show()
+                pickImageob()
         }
 
         //select from camera not implemented
@@ -63,13 +66,13 @@ class MainFragment : Fragment() {
             if(c==2)
                 pickImagecam()
             else
-                Toast.makeText(requireActivity(), "Turn on Switch for image with text", Toast.LENGTH_SHORT).show()
+                pickImagecamob()
         }
 
         return binding.root
     }
 
-    //uri from gallery pick
+    //uri from gallery pick text
     private fun pickImage() {
         val intent = Intent()
         intent.type = "image/*"
@@ -77,7 +80,15 @@ class MainFragment : Fragment() {
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), 110)
     }
 
-    //uri from camera not implemented
+    //uri from gallery pick object
+    private fun pickImageob() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 130)
+    }
+
+    //uri from camera pick text not implemented
     private fun pickImagecam() {
         val intentcam = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         intentcam.type = "image/*"
@@ -85,10 +96,18 @@ class MainFragment : Fragment() {
         startActivityForResult(Intent.createChooser(intentcam, "Click Picture"), 120)
     }
 
+    //uri from camera pick object not implemented
+    private fun pickImagecamob() {
+        val intentcam = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        intentcam.type = "image/*"
+        intentcam.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intentcam, "Click Picture"), 140)
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
-            110 -> {
+            110 -> { // text-gallery
                 when (resultCode) {
                     AppCompatActivity.RESULT_OK -> {
                         data?.data?.let {
@@ -96,7 +115,7 @@ class MainFragment : Fragment() {
                             bitmap = getBitmapFromUri(it);
                         }
 
-                        val recognizer = TextRecognition.getClient()
+                        val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
                         bitmap?.let {
                             val image = InputImage.fromBitmap(it, 0)
                             recognizer.process(image)
@@ -119,7 +138,7 @@ class MainFragment : Fragment() {
                 }
             }
 
-            120 -> {
+            120 -> { // text-camera
                 when (resultCode) {
                     AppCompatActivity.RESULT_OK -> {
                         data?.data?.let {
@@ -127,7 +146,7 @@ class MainFragment : Fragment() {
                             bitmap = getBitmapFromUri(it);
                         }
 
-                        val recognizer = TextRecognition.getClient()
+                        val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
                         bitmap?.let {
                             val image = InputImage.fromBitmap(it, 0)
                             recognizer.process(image)
@@ -145,6 +164,62 @@ class MainFragment : Fragment() {
 
                         if (bitmap == null)
                             Toast.makeText(requireActivity(), "Please click an image!", Toast.LENGTH_SHORT).show()
+
+                    }
+                }
+            }
+
+            130 -> { //object-gallery
+                when (resultCode) {
+                    AppCompatActivity.RESULT_OK -> {
+                        data?.data?.let {
+                            bitmap = null
+                            bitmap = getBitmapFromUri(it);
+                        }
+
+                        val recognizer = ImageLabeling.getClient(ImageLabelerOptions.DEFAULT_OPTIONS)
+                        bitmap?.let {
+                            val image = InputImage.fromBitmap(it, 0)
+                            recognizer.process(image)
+                                .addOnSuccessListener { labels ->
+                                    //for (label in labels) {} - when multiple labels needed
+                                        Toast.makeText(requireActivity(), labels[0].text, Toast.LENGTH_LONG).show()
+                                }
+                                .addOnFailureListener { e ->
+                                    Toast.makeText(requireActivity(), "Error: " + e.message, Toast.LENGTH_SHORT).show()
+                                }
+                        }
+
+                        if (bitmap == null)
+                            Toast.makeText(requireActivity(), "Please select an image!", Toast.LENGTH_SHORT).show()
+
+                    }
+                }
+            }
+
+            140 -> { //object-camera
+                when (resultCode) {
+                    AppCompatActivity.RESULT_OK -> {
+                        data?.data?.let {
+                            bitmap = null
+                            bitmap = getBitmapFromUri(it);
+                        }
+
+                        val recognizer = ImageLabeling.getClient(ImageLabelerOptions.DEFAULT_OPTIONS)
+                        bitmap?.let {
+                            val image = InputImage.fromBitmap(it, 0)
+                            recognizer.process(image)
+                                .addOnSuccessListener { labels ->
+                                    //for (label in labels) {} - when multiple labels needed
+                                        Toast.makeText(requireActivity(), labels[0].text, Toast.LENGTH_LONG).show()
+                                }
+                                .addOnFailureListener { e ->
+                                    Toast.makeText(requireActivity(), "Error: " + e.message, Toast.LENGTH_SHORT).show()
+                                }
+                        }
+
+                        if (bitmap == null)
+                            Toast.makeText(requireActivity(), "Please select an image!", Toast.LENGTH_SHORT).show()
 
                     }
                 }
