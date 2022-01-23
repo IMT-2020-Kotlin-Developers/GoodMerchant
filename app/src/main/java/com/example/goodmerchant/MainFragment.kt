@@ -1,19 +1,34 @@
 package com.example.goodmerchant
 
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.goodmerchant.Retrofit.*
 import com.example.goodmerchant.databinding.FragmentMainBinding
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.text.TextRecognition
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.FileDescriptor
+import java.io.IOException
 
 class MainFragment : Fragment() {
+
+    private var bitmap: Bitmap? = null
+    var c=1
+
     lateinit var binding: FragmentMainBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,12 +37,129 @@ class MainFragment : Fragment() {
 
         binding = FragmentMainBinding.inflate(layoutInflater, container, false)
 
+        //switch
+        binding.switch1.setOnCheckedChangeListener { _, isChecked ->
+            c = if(isChecked) 2
+            else 1
+        }
+
+        //manual search
         binding.searchicon.setOnClickListener {
             if(binding.searchtext.text != null){
-            getProducts()
+                getProducts()
             }
         }
+
+        //select from gallery
+        binding.gallery.setOnClickListener {
+            if(c==2)
+                pickImage()
+            else
+                Toast.makeText(requireActivity(), "Turn on Switch for image with text", Toast.LENGTH_SHORT).show()
+        }
+
+        //select from camera not implemented
+        binding.camera.setOnClickListener {
+            if(c==2)
+                pickImagecam()
+            else
+                Toast.makeText(requireActivity(), "Turn on Switch for image with text", Toast.LENGTH_SHORT).show()
+        }
+
         return binding.root
+    }
+
+    //uri from gallery pick
+    private fun pickImage() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 110)
+    }
+
+    //uri from camera not implemented
+    private fun pickImagecam() {
+        val intentcam = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        intentcam.type = "image/*"
+        intentcam.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intentcam, "Click Picture"), 120)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            110 -> {
+                when (resultCode) {
+                    AppCompatActivity.RESULT_OK -> {
+                        data?.data?.let {
+                            bitmap = null
+                            bitmap = getBitmapFromUri(it);
+                        }
+
+                        val recognizer = TextRecognition.getClient()
+                        bitmap?.let {
+                            val image = InputImage.fromBitmap(it, 0)
+                            recognizer.process(image)
+                                .addOnSuccessListener { visionText ->
+                                    // textBlocks -> will return list of block of detected text
+                                    // lines -> will return list of detected lines
+                                    // elements -> will return list of detected words
+                                    // boundingBox -> will return rectangle box area in bitmap
+                                    Toast.makeText(requireActivity(), visionText.text, Toast.LENGTH_LONG).show()
+                                }
+                                .addOnFailureListener { e ->
+                                    Toast.makeText(requireActivity(), "Error: " + e.message, Toast.LENGTH_SHORT).show()
+                                }
+                        }
+
+                        if (bitmap == null)
+                            Toast.makeText(requireActivity(), "Please select an image!", Toast.LENGTH_SHORT).show()
+
+                    }
+                }
+            }
+
+            120 -> {
+                when (resultCode) {
+                    AppCompatActivity.RESULT_OK -> {
+                        data?.data?.let {
+                            bitmap = null
+                            bitmap = getBitmapFromUri(it);
+                        }
+
+                        val recognizer = TextRecognition.getClient()
+                        bitmap?.let {
+                            val image = InputImage.fromBitmap(it, 0)
+                            recognizer.process(image)
+                                .addOnSuccessListener { visionText ->
+                                    // textBlocks -> will return list of block of detected text
+                                    // lines -> will return list of detected lines
+                                    // elements -> will return list of detected words
+                                    // boundingBox -> will return rectangle box area in bitmap
+                                    Toast.makeText(requireActivity(), visionText.text, Toast.LENGTH_SHORT).show()
+                                }
+                                .addOnFailureListener { e ->
+                                    Toast.makeText(requireActivity(), "Error: " + e.message, Toast.LENGTH_SHORT).show()
+                                }
+                        }
+
+                        if (bitmap == null)
+                            Toast.makeText(requireActivity(), "Please click an image!", Toast.LENGTH_SHORT).show()
+
+                    }
+                }
+            }
+        }
+    }
+
+    //URI to bitmap
+    @Throws(IOException::class)
+    private fun getBitmapFromUri(uri: Uri): Bitmap? {
+        val parcelFileDescriptor = activity?.contentResolver?.openFileDescriptor(uri, "r")
+        val fileDescriptor: FileDescriptor = parcelFileDescriptor!!.fileDescriptor
+        val image = BitmapFactory.decodeFileDescriptor(fileDescriptor)
+        parcelFileDescriptor.close()
+        return image
     }
 
     private fun getProducts() {
