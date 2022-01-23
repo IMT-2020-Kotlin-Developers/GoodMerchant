@@ -12,18 +12,19 @@ class IntroScreen2 : AppCompatActivity() {
     }
 
     fun backbtn(view: android.view.View) {
-        val intent = Intent(this,IntroScreen1::class.java)
+        val intent = Intent(this, IntroScreen1::class.java)
         startActivity(intent)
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
+
     fun startbtn(view: android.view.View) {
-        val intent = Intent(this,MainActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
 
-    override fun finish()
-    { super.finish()
+    override fun finish() {
+        super.finish()
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 }
