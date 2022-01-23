@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-       moveTaskToBack(true)
+        moveTaskToBack(true)
     }
 
 }

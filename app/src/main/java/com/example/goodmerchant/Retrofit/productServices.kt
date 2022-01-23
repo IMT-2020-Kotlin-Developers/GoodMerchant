@@ -9,14 +9,17 @@ import retrofit2.http.Query
 //https://serpapi.com/search.json?engine=google&q=mouse&location=Austin%2C+Texas%2C+United+States&google_domain=google.com&gl=us&hl=en&tbm=shop&api_key=88e24b82106d51e0d94dd7f31afb6c94c35f0abfaeab6e0ef283deee0f08595e
 const val BASE_URL = "https://serpapi.com/"
 const val API_KEY = "88e24b82106d51e0d94dd7f31afb6c94c35f0abfaeab6e0ef283deee0f08595e"
+
 interface productInterface {
     @GET("search.json?api_key=$API_KEY&engine=google&location=Austin%2C+Texas%2C+United+States&google_domain=google.com&gl=us&hl=en&tbm=shop")
     fun getProduct(
-        @Query("q") q : String
-    ) : Call<serpApiResult>
+        @Query("q") q: String
+    ): Call<serpApiResult>
 }
-object productService{
-    val productInstance : productInterface
+
+object productService {
+    val productInstance: productInterface
+
     init {
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)

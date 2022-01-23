@@ -16,7 +16,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    buildFeatures{
+    buildFeatures {
         viewBinding true
     }
     buildTypes {
@@ -58,3 +58,4 @@ dependencies {
     // ML KIT
     implementation 'com.google.mlkit:image-labeling:17.0.6'
 }
+

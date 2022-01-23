@@ -30,7 +30,7 @@ import java.io.IOException
 class MainFragment : Fragment() {
 
     private var bitmap: Bitmap? = null
-    var c=1
+    var c = 1
 
     lateinit var binding: FragmentMainBinding
     override fun onCreateView(
@@ -42,20 +42,20 @@ class MainFragment : Fragment() {
 
         //switch
         binding.switch1.setOnCheckedChangeListener { _, isChecked ->
-            c = if(isChecked) 2
+            c = if (isChecked) 2
             else 1
         }
 
         //manual search
         binding.searchicon.setOnClickListener {
-            if(binding.searchtext.text != null){
+            if (binding.searchtext.text != null) {
                 getProducts()
             }
         }
 
         //select from gallery
         binding.gallery.setOnClickListener {
-            if(c==2)
+            if (c == 2)
                 pickImage()
             else
                 pickImageob()
@@ -63,7 +63,7 @@ class MainFragment : Fragment() {
 
         //select from camera not implemented
         binding.camera.setOnClickListener {
-            if(c==2)
+            if (c == 2)
                 pickImagecam()
             else
                 pickImagecamob()
@@ -115,7 +115,8 @@ class MainFragment : Fragment() {
                             bitmap = getBitmapFromUri(it);
                         }
 
-                        val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
+                        val recognizer =
+                            TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
                         bitmap?.let {
                             val image = InputImage.fromBitmap(it, 0)
                             recognizer.process(image)
@@ -124,15 +125,27 @@ class MainFragment : Fragment() {
                                     // lines -> will return list of detected lines
                                     // elements -> will return list of detected words
                                     // boundingBox -> will return rectangle box area in bitmap
-                                    Toast.makeText(requireActivity(), visionText.text, Toast.LENGTH_LONG).show()
+                                    Toast.makeText(
+                                        requireActivity(),
+                                        visionText.text,
+                                        Toast.LENGTH_LONG
+                                    ).show()
                                 }
                                 .addOnFailureListener { e ->
-                                    Toast.makeText(requireActivity(), "Error: " + e.message, Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(
+                                        requireActivity(),
+                                        "Error: " + e.message,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
                         }
 
                         if (bitmap == null)
-                            Toast.makeText(requireActivity(), "Please select an image!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                requireActivity(),
+                                "Please select an image!",
+                                Toast.LENGTH_SHORT
+                            ).show()
 
                     }
                 }
@@ -146,7 +159,8 @@ class MainFragment : Fragment() {
                             bitmap = getBitmapFromUri(it);
                         }
 
-                        val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
+                        val recognizer =
+                            TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
                         bitmap?.let {
                             val image = InputImage.fromBitmap(it, 0)
                             recognizer.process(image)
@@ -155,15 +169,27 @@ class MainFragment : Fragment() {
                                     // lines -> will return list of detected lines
                                     // elements -> will return list of detected words
                                     // boundingBox -> will return rectangle box area in bitmap
-                                    Toast.makeText(requireActivity(), visionText.text, Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(
+                                        requireActivity(),
+                                        visionText.text,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
                                 .addOnFailureListener { e ->
-                                    Toast.makeText(requireActivity(), "Error: " + e.message, Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(
+                                        requireActivity(),
+                                        "Error: " + e.message,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
                         }
 
                         if (bitmap == null)
-                            Toast.makeText(requireActivity(), "Please click an image!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                requireActivity(),
+                                "Please click an image!",
+                                Toast.LENGTH_SHORT
+                            ).show()
 
                     }
                 }
@@ -177,23 +203,37 @@ class MainFragment : Fragment() {
                             bitmap = getBitmapFromUri(it);
                         }
 
-                        val recognizer = ImageLabeling.getClient(ImageLabelerOptions.DEFAULT_OPTIONS)
+                        val recognizer =
+                            ImageLabeling.getClient(ImageLabelerOptions.DEFAULT_OPTIONS)
                         bitmap?.let {
                             val image = InputImage.fromBitmap(it, 0)
                             recognizer.process(image)
                                 .addOnSuccessListener { labels ->
                                     //for (label in labels) {} - when multiple labels needed
-                                        Toast.makeText(requireActivity(), labels[0].text, Toast.LENGTH_LONG).show()
+                                    Toast.makeText(
+                                        requireActivity(),
+                                        labels[0].text,
+                                        Toast.LENGTH_LONG
+                                    ).show()
                                 }
                                 .addOnFailureListener { e ->
-                                    Toast.makeText(requireActivity(), "Error: " + e.message, Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(
+                                        requireActivity(),
+                                        "Error: " + e.message,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
                         }
 
                         if (bitmap == null)
-                            Toast.makeText(requireActivity(), "Please select an image!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                requireActivity(),
+                                "Please select an image!",
+                                Toast.LENGTH_SHORT
+                            ).show()
 
                     }
+
                 }
             }
 
@@ -205,21 +245,34 @@ class MainFragment : Fragment() {
                             bitmap = getBitmapFromUri(it);
                         }
 
-                        val recognizer = ImageLabeling.getClient(ImageLabelerOptions.DEFAULT_OPTIONS)
+                        val recognizer =
+                            ImageLabeling.getClient(ImageLabelerOptions.DEFAULT_OPTIONS)
                         bitmap?.let {
                             val image = InputImage.fromBitmap(it, 0)
                             recognizer.process(image)
                                 .addOnSuccessListener { labels ->
                                     //for (label in labels) {} - when multiple labels needed
-                                        Toast.makeText(requireActivity(), labels[0].text, Toast.LENGTH_LONG).show()
+                                    Toast.makeText(
+                                        requireActivity(),
+                                        labels[0].text,
+                                        Toast.LENGTH_LONG
+                                    ).show()
                                 }
                                 .addOnFailureListener { e ->
-                                    Toast.makeText(requireActivity(), "Error: " + e.message, Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(
+                                        requireActivity(),
+                                        "Error: " + e.message,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
                         }
 
                         if (bitmap == null)
-                            Toast.makeText(requireActivity(), "Please select an image!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                requireActivity(),
+                                "Please select an image!",
+                                Toast.LENGTH_SHORT
+                            ).show()
 
                     }
                 }

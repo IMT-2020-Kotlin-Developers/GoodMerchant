@@ -100,11 +100,11 @@
             android:id="@+id/cardview2"
             android:layout_width="39dp"
             android:layout_height="13dp"
-            android:layout_marginTop="70dp"
             android:layout_marginStart="80dp"
-            app:cardElevation="20dp"
+            android:layout_marginTop="70dp"
             app:cardBackgroundColor="#03989e"
             app:cardCornerRadius="50dp"
+            app:cardElevation="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
