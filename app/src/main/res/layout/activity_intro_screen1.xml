@@ -56,7 +56,7 @@
 
         <Button
             android:id="@+id/button"
-            android:layout_width="95dp"
+            android:layout_width="105dp"
             android:layout_height="52dp"
             android:layout_marginStart="5dp"
             android:layout_marginBottom="22dp"
@@ -72,7 +72,7 @@
 
         <Button
             android:id="@+id/button2"
-            android:layout_width="95dp"
+            android:layout_width="105dp"
             android:layout_height="52dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="22dp"
@@ -89,7 +89,7 @@
             android:id="@+id/cardview"
             android:layout_width="39dp"
             android:layout_height="13dp"
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="56dp"
             android:layout_marginEnd="80dp"
             app:cardBackgroundColor="#03989e"
             app:cardCornerRadius="50dp"
@@ -103,7 +103,7 @@
             android:layout_width="39dp"
             android:layout_height="13dp"
             android:layout_marginStart="80dp"
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="56dp"
             app:cardBackgroundColor="@color/lightbackground"
             app:cardCornerRadius="50dp"
             app:layout_constraintEnd_toEndOf="parent"

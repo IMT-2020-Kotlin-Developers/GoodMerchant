@@ -20,12 +20,15 @@
 
         <activity
             android:name=".IntroScreen2"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".IntroScreen1"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".SplashScreen"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,6 +38,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
     </application>
 

@@ -26,18 +26,18 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="321dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="80dp"
                 android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/searchtext"
-                    android:layout_width="200dp"
+                    android:layout_width="273dp"
                     android:layout_height="48dp"
                     android:background="@drawable/searchbar2"
-                    android:hint="Search By text"
+                    android:hint="Search By Text"
                     android:textColor="@color/black"
                     android:textColorHint="@color/textColor" />
 
@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="110dp"
 
                 android:orientation="horizontal">
 
@@ -61,7 +61,7 @@
                     android:id="@+id/camera"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="50dp"
+                    android:layout_marginEnd="80dp"
                     android:background="@drawable/searchbar"
                     android:src="@drawable/ic_baseline_camera_alt_24" />
 
@@ -77,7 +77,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="65dp"
 
                 android:orientation="horizontal">
 
@@ -87,13 +87,13 @@
                     android:layout_marginEnd="10dp"
                     android:text="Image Has Text  >"
                     android:textColor="@color/textColor"
-                    android:textSize="18dp" />
+                    android:textSize="20dp" />
 
                 <Switch
                     android:id="@+id/switch1"
                     style="@style/switch1"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:scaleX="1"
                     android:scaleY="1" />
             </LinearLayout>
