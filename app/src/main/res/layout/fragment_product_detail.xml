@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ProductDetailFragment"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/mainscreensecond"
+        android:orientation="vertical">
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/productdetauilbgcurve">
+
+<!--        <de.hdodenhof.circleimageview.CircleImageView-->
+<!--            android:id="@+id/productDetailImageIv"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="180dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginTop="100dp"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            android:src="@drawable/dummymouseimg"-->
+<!--            app:civ_border_color="#CAFDFF"-->
+<!--            app:civ_border_width="8dp" />-->
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/productDetailImageIv"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+            app:srcCompat="@drawable/dummymouseimg" />
+        <TextView
+            android:id="@+id/productDetailProductNameTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/productDetailImageIv"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:text="Product name"
+            android:textColor="@color/textColor"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"/>
+
+        <ImageView
+            android:layout_marginStart="16dp"
+            android:id="@+id/productDetailProductTagIv"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="16dp"
+            android:layout_below="@id/productDetailProductNameTv"
+            android:src="@drawable/productdetailpricetag" />
+
+        <TextView
+            android:id="@+id/productDetailProductPriceTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/productDetailProductNameTv"
+            android:layout_alignBottom="@+id/productDetailProductTagIv"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_toRightOf="@id/productDetailProductTagIv"
+            android:text="$ 500"
+            android:textColor="@color/textColor"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_marginStart="16dp"
+            android:id="@+id/productDetailProductDescriptionIv"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/productDetailProductTagIv"
+            android:src="@drawable/productdetaildescription"
+            android:layout_marginTop="16dp"/>
+
+        <TextView
+            android:id="@+id/productDetailProductDetailTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/productDetailProductPriceTv"
+            android:layout_alignBottom="@+id/productDetailProductDescriptionIv"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_toRightOf="@id/productDetailProductDescriptionIv"
+            android:text="This is the description for Product"
+            android:textColor="@color/textColor" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/productDetailProductDetailTv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="64dp"
+            android:backgroundTint="#03989E"
+            android:padding="16dp"
+            android:text="BUY NOW"
+            android:textColor="@color/white"
+            app:cornerRadius="4dp" />
+    </RelativeLayout>
+
+</FrameLayout>

@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.goodmerchant.Retrofit.*
@@ -48,9 +50,10 @@ class MainFragment : Fragment() {
 
         //manual search
         binding.searchicon.setOnClickListener {
-            if (binding.searchtext.text != null) {
-                getProducts()
-            }
+//            if (binding.searchtext.text != null) {
+//                getProducts()
+//            }
+            findNavController().navigate(R.id.action_mainFragment_to_listFragment)
         }
 
         //select from gallery
