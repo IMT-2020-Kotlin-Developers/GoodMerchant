@@ -15,6 +15,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.goodmerchant.Recyclerview.ListFragmentDirections
 import com.example.goodmerchant.Retrofit.*
 import com.example.goodmerchant.databinding.FragmentMainBinding
 import com.google.mlkit.vision.common.InputImage
@@ -50,10 +51,10 @@ class MainFragment : Fragment() {
 
         //manual search
         binding.searchicon.setOnClickListener {
-//            if (binding.searchtext.text != null) {
-//                getProducts()
-//            }
-            findNavController().navigate(R.id.action_mainFragment_to_listFragment)
+            if (binding.searchtext.text != null) {
+                getProducts()
+            }
+//            findNavController().navigate(R.id.action_mainFragment_to_listFragment)
         }
 
         //select from gallery
@@ -300,7 +301,10 @@ class MainFragment : Fragment() {
             override fun onResponse(call: Call<serpApiResult>, response: Response<serpApiResult>) {
                 val productlist: serpApiResult? = response.body()
                 if (productlist != null) {
+                    val productDetailList: Array<productModal> = productlist.shopping_results
                     Log.d("@@@@", productlist.toString())
+                    val directions = MainFragmentDirections.actionMainFragmentToListFragment(productDetailList)
+                    findNavController().navigate(directions)
                 }
             }
 

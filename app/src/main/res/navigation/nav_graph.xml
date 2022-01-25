@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_listFragment_to_productDetailFragment"
             app:destination="@id/productDetailFragment" />
+        <argument
+            android:name="productDetailList"
+            app:argType="com.example.goodmerchant.Retrofit.productModal[]" />
     </fragment>
     <fragment
         android:id="@+id/productDetailFragment"
