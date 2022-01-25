@@ -19,7 +19,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 
 
-class ListAdapter(private val productList : ArrayList<productModal>,
+class ListAdapter(private val productList : Array<productModal>,
                     private val listener: OnItemClickListener
                   ):
     RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
