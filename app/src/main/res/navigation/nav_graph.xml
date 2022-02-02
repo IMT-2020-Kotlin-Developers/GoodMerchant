@@ -37,8 +37,6 @@
         <action
             android:id="@+id/action_productDetailFragment_to_listFragment2"
             app:destination="@id/listFragment"
-            app:launchSingleTop="false"
-            app:popUpTo="@id/listFragment"
-            app:popUpToInclusive="false" />
+            app:popUpTo="@id/mainFragment" />
     </fragment>
 </navigation>

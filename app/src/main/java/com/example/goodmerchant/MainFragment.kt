@@ -1,5 +1,6 @@
 package com.example.goodmerchant
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -18,11 +19,15 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.goodmerchant.Recyclerview.ListFragmentDirections
 import com.example.goodmerchant.Retrofit.*
 import com.example.goodmerchant.databinding.FragmentMainBinding
+import com.google.mlkit.common.model.LocalModel
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.label.ImageLabeling
 import com.google.mlkit.vision.label.defaults.ImageLabelerOptions
+import com.google.mlkit.vision.objects.ObjectDetection
+import com.google.mlkit.vision.objects.custom.CustomObjectDetectorOptions
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
+import kotlinx.android.synthetic.main.fragment_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,19 +41,24 @@ class MainFragment : Fragment() {
     var c = 1
 
     lateinit var binding: FragmentMainBinding
+    val localModal = LocalModel.Builder().setAssetFilePath("lite-model_object_detection_mobile_object_labeler_v1_1.tflite").build()
+    val customObjectDetectorOption = CustomObjectDetectorOptions.Builder(localModal).setDetectorMode(CustomObjectDetectorOptions.STREAM_MODE).enableClassification().setClassificationConfidenceThreshold(0.7f)
+        .setMaxPerObjectLabelCount(1).build()
+    val objectDetector = ObjectDetection.getClient(customObjectDetectorOption)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         binding = FragmentMainBinding.inflate(layoutInflater, container, false)
 
+
+
         //switch
+
         binding.switch1.setOnCheckedChangeListener { _, isChecked ->
             c = if (isChecked) 2
             else 1
         }
-
         //manual search
         binding.searchicon.setOnClickListener {
             if (binding.searchtext.text != null) {
@@ -56,7 +66,6 @@ class MainFragment : Fragment() {
             }
 //            findNavController().navigate(R.id.action_mainFragment_to_listFragment)
         }
-
         //select from gallery
         binding.gallery.setOnClickListener {
             if (c == 2)
@@ -64,7 +73,6 @@ class MainFragment : Fragment() {
             else
                 pickImageob()
         }
-
         //select from camera not implemented
         binding.camera.setOnClickListener {
             if (c == 2)
@@ -72,7 +80,6 @@ class MainFragment : Fragment() {
             else
                 pickImagecamob()
         }
-
         return binding.root
     }
 
@@ -82,6 +89,7 @@ class MainFragment : Fragment() {
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), 110)
+
     }
 
     //uri from gallery pick object
@@ -211,12 +219,12 @@ class MainFragment : Fragment() {
                             ImageLabeling.getClient(ImageLabelerOptions.DEFAULT_OPTIONS)
                         bitmap?.let {
                             val image = InputImage.fromBitmap(it, 0)
-                            recognizer.process(image)
+                            objectDetector.process(image)
                                 .addOnSuccessListener { labels ->
                                     //for (label in labels) {} - when multiple labels needed
                                     Toast.makeText(
                                         requireActivity(),
-                                        labels[0].text,
+                                        labels[0].toString() ,
                                         Toast.LENGTH_LONG
                                     ).show()
                                 }
