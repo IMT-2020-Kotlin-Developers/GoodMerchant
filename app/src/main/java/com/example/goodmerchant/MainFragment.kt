@@ -1,5 +1,7 @@
 package com.example.goodmerchant
 
+import android.content.ContentProvider
+import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -50,11 +52,7 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMainBinding.inflate(layoutInflater, container, false)
-
-
-
         //switch
-
         binding.switch1.setOnCheckedChangeListener { _, isChecked ->
             c = if (isChecked) 2
             else 1
@@ -64,244 +62,28 @@ class MainFragment : Fragment() {
             if (binding.searchtext.text != null) {
                 getProducts()
             }
-//            findNavController().navigate(R.id.action_mainFragment_to_listFragment)
+
         }
-        //select from gallery
-        binding.gallery.setOnClickListener {
-            if (c == 2)
-                pickImage()
-            else
-                pickImageob()
+
+        binding.camera.setOnClickListener{
+            takeGallery()
         }
-        //select from camera not implemented
-        binding.camera.setOnClickListener {
-            if (c == 2)
-                pickImagecam()
-            else
-                pickImagecamob()
-        }
+
         return binding.root
     }
 
-    //uri from gallery pick text
-    private fun pickImage() {
-        val intent = Intent()
-        intent.type = "image/*"
-        intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 110)
 
+    fun takeGallery() {
+        val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+        startActivityForResult(gallery, 100)
     }
-
-    //uri from gallery pick object
-    private fun pickImageob() {
-        val intent = Intent()
-        intent.type = "image/*"
-        intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 130)
-    }
-
-    //uri from camera pick text not implemented
-    private fun pickImagecam() {
-        val intentcam = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        intentcam.type = "image/*"
-        intentcam.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(Intent.createChooser(intentcam, "Click Picture"), 120)
-    }
-
-    //uri from camera pick object not implemented
-    private fun pickImagecamob() {
-        val intentcam = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        intentcam.type = "image/*"
-        intentcam.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(Intent.createChooser(intentcam, "Click Picture"), 140)
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode) {
-            110 -> { // text-gallery
-                when (resultCode) {
-                    AppCompatActivity.RESULT_OK -> {
-                        data?.data?.let {
-                            bitmap = null
-                            bitmap = getBitmapFromUri(it);
-                        }
-
-                        val recognizer =
-                            TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
-                        bitmap?.let {
-                            val image = InputImage.fromBitmap(it, 0)
-                            recognizer.process(image)
-                                .addOnSuccessListener { visionText ->
-                                    // textBlocks -> will return list of block of detected text
-                                    // lines -> will return list of detected lines
-                                    // elements -> will return list of detected words
-                                    // boundingBox -> will return rectangle box area in bitmap
-                                    Toast.makeText(
-                                        requireActivity(),
-                                        visionText.text,
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                }
-                                .addOnFailureListener { e ->
-                                    Toast.makeText(
-                                        requireActivity(),
-                                        "Error: " + e.message,
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                }
-                        }
-
-                        if (bitmap == null)
-                            Toast.makeText(
-                                requireActivity(),
-                                "Please select an image!",
-                                Toast.LENGTH_SHORT
-                            ).show()
-
-                    }
-                }
-            }
-
-            120 -> { // text-camera
-                when (resultCode) {
-                    AppCompatActivity.RESULT_OK -> {
-                        data?.data?.let {
-                            bitmap = null
-                            bitmap = getBitmapFromUri(it);
-                        }
-
-                        val recognizer =
-                            TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
-                        bitmap?.let {
-                            val image = InputImage.fromBitmap(it, 0)
-                            recognizer.process(image)
-                                .addOnSuccessListener { visionText ->
-                                    // textBlocks -> will return list of block of detected text
-                                    // lines -> will return list of detected lines
-                                    // elements -> will return list of detected words
-                                    // boundingBox -> will return rectangle box area in bitmap
-                                    Toast.makeText(
-                                        requireActivity(),
-                                        visionText.text,
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                }
-                                .addOnFailureListener { e ->
-                                    Toast.makeText(
-                                        requireActivity(),
-                                        "Error: " + e.message,
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                }
-                        }
-
-                        if (bitmap == null)
-                            Toast.makeText(
-                                requireActivity(),
-                                "Please click an image!",
-                                Toast.LENGTH_SHORT
-                            ).show()
-
-                    }
-                }
-            }
-
-            130 -> { //object-gallery
-                when (resultCode) {
-                    AppCompatActivity.RESULT_OK -> {
-                        data?.data?.let {
-                            bitmap = null
-                            bitmap = getBitmapFromUri(it);
-                        }
-
-                        val recognizer =
-                            ImageLabeling.getClient(ImageLabelerOptions.DEFAULT_OPTIONS)
-                        bitmap?.let {
-                            val image = InputImage.fromBitmap(it, 0)
-                            objectDetector.process(image)
-                                .addOnSuccessListener { labels ->
-                                    //for (label in labels) {} - when multiple labels needed
-                                    Toast.makeText(
-                                        requireActivity(),
-                                        labels[0].toString() ,
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                }
-                                .addOnFailureListener { e ->
-                                    Toast.makeText(
-                                        requireActivity(),
-                                        "Error: " + e.message,
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                }
-                        }
-
-                        if (bitmap == null)
-                            Toast.makeText(
-                                requireActivity(),
-                                "Please select an image!",
-                                Toast.LENGTH_SHORT
-                            ).show()
-
-                    }
-
-                }
-            }
-
-            140 -> { //object-camera
-                when (resultCode) {
-                    AppCompatActivity.RESULT_OK -> {
-                        data?.data?.let {
-                            bitmap = null
-                            bitmap = getBitmapFromUri(it);
-                        }
-
-                        val recognizer =
-                            ImageLabeling.getClient(ImageLabelerOptions.DEFAULT_OPTIONS)
-                        bitmap?.let {
-                            val image = InputImage.fromBitmap(it, 0)
-                            recognizer.process(image)
-                                .addOnSuccessListener { labels ->
-                                    //for (label in labels) {} - when multiple labels needed
-                                    Toast.makeText(
-                                        requireActivity(),
-                                        labels[0].text,
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                }
-                                .addOnFailureListener { e ->
-                                    Toast.makeText(
-                                        requireActivity(),
-                                        "Error: " + e.message,
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                }
-                        }
-
-                        if (bitmap == null)
-                            Toast.makeText(
-                                requireActivity(),
-                                "Please select an image!",
-                                Toast.LENGTH_SHORT
-                            ).show()
-
-                    }
-                }
-            }
+        if (resultCode == 100 && requestCode == 100) {
+                var imageUri: Uri? =  data?.data
+            val bitmap = MediaStore.Images.Media.getBitmap(, imageUri)
         }
     }
-
-    //URI to bitmap
-    @Throws(IOException::class)
-    private fun getBitmapFromUri(uri: Uri): Bitmap? {
-        val parcelFileDescriptor = activity?.contentResolver?.openFileDescriptor(uri, "r")
-        val fileDescriptor: FileDescriptor = parcelFileDescriptor!!.fileDescriptor
-        val image = BitmapFactory.decodeFileDescriptor(fileDescriptor)
-        parcelFileDescriptor.close()
-        return image
-    }
-
     private fun getProducts() {
         val search = binding.searchtext.text.toString()
         val products = productService.productInstance.getProduct(search)
@@ -321,5 +103,24 @@ class MainFragment : Fragment() {
             }
         })
     }
+    fun getTags(){
+        val tag = tagservices.tagInstance.getTag("https%3A%2F%2Fi.imgur.com%2FHBrB8p0.png")
+        tag.enqueue(object : Callback<imagetagResult>{
+                override fun onResponse(call: Call<imagetagResult>, response: Response<imagetagResult>) {
+                    val currenttag : imagetagResult? = response.body()
+                    if(currenttag != null){
+                        val tagDetail : String = currenttag.searchInformation!!.query_displayed
+
+                        Log.d("%%%%%", tagDetail)
+                    }
+                }
+
+                override fun onFailure(call: Call<imagetagResult>, t: Throwable) {
+                    Log.d("%%%%%", "Failed sharam ati hai?", t)
+                }
+            })
+    }
+
 
 }
+
