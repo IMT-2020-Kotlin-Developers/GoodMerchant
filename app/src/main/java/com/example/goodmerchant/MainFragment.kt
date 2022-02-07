@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -24,14 +25,8 @@ import com.example.goodmerchant.Retrofit.*
 import com.example.goodmerchant.ViewModel.productViewmodel
 import com.example.goodmerchant.databinding.FragmentMainBinding
 import com.google.mlkit.common.model.LocalModel
-import com.google.mlkit.vision.common.InputImage
-import com.google.mlkit.vision.label.ImageLabeling
-import com.google.mlkit.vision.label.defaults.ImageLabelerOptions
-import com.google.mlkit.vision.objects.ObjectDetection
-import com.google.mlkit.vision.objects.custom.CustomObjectDetectorOptions
-import com.google.mlkit.vision.text.TextRecognition
-import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.coroutines.delay
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,9 +40,6 @@ class MainFragment : Fragment() {
   private lateinit var viewModel : productViewmodel
     lateinit var binding: FragmentMainBinding
     val localModal = LocalModel.Builder().setAssetFilePath("lite-model_object_detection_mobile_object_labeler_v1_1.tflite").build()
-    val customObjectDetectorOption = CustomObjectDetectorOptions.Builder(localModal).setDetectorMode(CustomObjectDetectorOptions.STREAM_MODE).enableClassification().setClassificationConfidenceThreshold(0.7f)
-        .setMaxPerObjectLabelCount(1).build()
-    val objectDetector = ObjectDetection.getClient(customObjectDetectorOption)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,19 +47,30 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(productViewmodel::class.java)
         binding = FragmentMainBinding.inflate(layoutInflater, container, false)
         //manual search
+        var temp : Boolean = false
         binding.searchicon.setOnClickListener {
             if (binding.searchtext.text != null) {
                viewModel.getProducts(binding.searchtext.text.toString())
-                var  productDetailList: Array<productModal> =  viewModel.repository.getproductsfromlist()
-                val directions = MainFragmentDirections.actionMainFragmentToListFragment(productDetailList)
-                findNavController().navigate(directions)
+                Handler().postDelayed({
+                    var productDetailList: Array<productModal> = viewModel.repository.getproductsfromlist()
+                    val directions = MainFragmentDirections.actionMainFragmentToListFragment(productDetailList)
+                    findNavController().navigate(directions)}
+                    ,4000)
+//                if(temp) {
+//                    var productDetailList: Array<productModal> = viewModel.repository.getproductsfromlist()
+//                    val directions = MainFragmentDirections.actionMainFragmentToListFragment(productDetailList)
+//                    findNavController().navigate(directions)
+//                }
+//                else{
+//                    temp = true
+//                }
             }
-
         }
 
-//        binding.camera.setOnClickListener{
+        binding.camera.setOnClickListener{
 //            takeGallery()
-//        }
+            getTags()
+        }
 
         return binding.root
     }
@@ -104,7 +107,7 @@ class MainFragment : Fragment() {
 //        })
 //    }
     fun getTags(){
-        val tag = tagservices.tagInstance.getTag("https%3A%2F%2Fi.imgur.com%2FHBrB8p0.png")
+        val tag = tagservices.tagInstance.getTag("https://rukminim1.flixcart.com/image/880/1056/kpydrbk0/shirt/g/9/p/s-black-5-jai-textiles-original-imag42m5hcfue7np.jpeg?q=50")
         tag.enqueue(object : Callback<imagetagResult>{
                 override fun onResponse(call: Call<imagetagResult>, response: Response<imagetagResult>) {
                     val currenttag : imagetagResult? = response.body()

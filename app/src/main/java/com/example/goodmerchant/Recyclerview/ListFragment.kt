@@ -8,12 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.goodmerchant.ProductDetailFragmentArgs
 import com.example.goodmerchant.R
 import com.example.goodmerchant.Retrofit.productModal
+import com.example.goodmerchant.ViewModel.productViewmodel
 import com.example.goodmerchant.databinding.FragmentListBinding
 import com.example.goodmerchant.databinding.FragmentMainBinding
 
@@ -21,8 +23,7 @@ class ListFragment : Fragment(), ListAdapter.OnItemClickListener{
     lateinit var binding: FragmentListBinding
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mArrayList: Array<productModal>
-
-
+    private lateinit var viewModel : productViewmodel
 
     lateinit var titleList : Array<String>
     lateinit var linkList : Array<String>
@@ -39,11 +40,11 @@ class ListFragment : Fragment(), ListAdapter.OnItemClickListener{
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentListBinding.inflate(layoutInflater, container, false)
-
-        val bundle = arguments
-        val args = ListFragmentArgs.fromBundle(bundle!!)
-        mArrayList = args.productDetailList
-
+        viewModel = ViewModelProvider(this).get(productViewmodel::class.java)
+//        val bundle = arguments
+//        val args = ListFragmentArgs.fromBundle(bundle!!)
+//        mArrayList = args.productDetailList
+        mArrayList = viewModel.repository.getproductsfromlist()
         mRecyclerView = binding.listRv
         mRecyclerView.layoutManager = LinearLayoutManager(activity)
         mRecyclerView.setHasFixedSize(true)

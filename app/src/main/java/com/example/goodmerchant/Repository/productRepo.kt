@@ -30,7 +30,9 @@ class productRepo(application: Application) {
                 if (productlist != null) {
                      productDetailList = productlist.shopping_results
                     Log.d("@@@@", productlist.toString())
-
+                }
+                else{
+                    Log.d("@@@","ProductList is null")
                 }
             }
 
