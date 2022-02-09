@@ -55,7 +55,7 @@ class MainFragment : Fragment() {
                     var productDetailList: Array<productModal> = viewModel.repository.getproductsfromlist()
                     val directions = MainFragmentDirections.actionMainFragmentToListFragment(productDetailList)
                     findNavController().navigate(directions)}
-                    ,4000)
+                    ,6000)
 //                if(temp) {
 //                    var productDetailList: Array<productModal> = viewModel.repository.getproductsfromlist()
 //                    val directions = MainFragmentDirections.actionMainFragmentToListFragment(productDetailList)
