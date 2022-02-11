@@ -71,8 +71,8 @@ class MainFragment : Fragment() {
         var temp : Boolean = false
         binding.searchicon.setOnClickListener {
             if (binding.searchtext.text != null) {
-               imageTag =  binding.searchtext.text.toString()
-                 fillListfragment(imageTag)
+                imageTag =  binding.searchtext.text.toString()
+                fillListfragment(imageTag)
             }
         }
 
@@ -93,39 +93,39 @@ class MainFragment : Fragment() {
         intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(intent,100)
     }
-private fun uploadimage(){
-    val progressBar = ProgressDialog(context)
-    progressBar.setMessage("Analizing")
-    progressBar.setCancelable(false)
-    progressBar.show()
+    private fun uploadimage(){
+        val progressBar = ProgressDialog(context)
+        progressBar.setMessage("Analizing")
+        progressBar.setCancelable(false)
+        progressBar.show()
 
-    val formatter = SimpleDateFormat("yyyy__MM__dd__HH__mm__ss", Locale.getDefault())
-    val now = Date()
-    val filename = formatter.format(now)
-    val storageReference = FirebaseStorage.getInstance().getReference("images/$filename")
-    storageReference.putFile(imageUri).
-            addOnSuccessListener {
-          storageReference.downloadUrl.addOnSuccessListener {
-              if(progressBar.isShowing) progressBar.dismiss()
-                    imageLink =  URL(it.toString())
-              Log.d("%%%%%", imageLink.toString())
-              getTags()
+        val formatter = SimpleDateFormat("yyyy__MM__dd__HH__mm__ss", Locale.getDefault())
+        val now = Date()
+        val filename = formatter.format(now)
+        val storageReference = FirebaseStorage.getInstance().getReference("images/$filename")
+        storageReference.putFile(imageUri).
+        addOnSuccessListener {
+            storageReference.downloadUrl.addOnSuccessListener {
+                if(progressBar.isShowing) progressBar.dismiss()
+                imageLink =  URL(it.toString())
+                Log.d("%%%%%", imageLink.toString())
+                getTags()
 
-          }.addOnFailureListener{
-              if(progressBar.isShowing) progressBar.dismiss()
-              Log.d("%%%%%", "Failed",it)
-          }
             }.addOnFailureListener{
-      if(progressBar.isShowing) progressBar.dismiss()
-        Log.d("%%%%%", "Failed",it)
-    }
+                if(progressBar.isShowing) progressBar.dismiss()
+                Log.d("%%%%%", "Failed",it)
+            }
+        }.addOnFailureListener{
+            if(progressBar.isShowing) progressBar.dismiss()
+            Log.d("%%%%%", "Failed",it)
+        }
 
-}
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == 100 && resultCode == RESULT_OK){
             imageUri = data?.data!!
-          uploadimage()
+            uploadimage()
         }
     }
     fun getTags(){
@@ -157,8 +157,6 @@ private fun uploadimage(){
             ,6000)
     }
 }
-
-
 
 
 

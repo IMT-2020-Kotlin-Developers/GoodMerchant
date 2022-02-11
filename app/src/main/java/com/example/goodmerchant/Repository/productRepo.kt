@@ -28,7 +28,7 @@ class productRepo(application: Application) {
             override fun onResponse(call: Call<serpApiResult>, response: Response<serpApiResult>) {
                 val productlist: serpApiResult? = response.body()
                 if (productlist != null) {
-                     productDetailList = productlist.shopping_results
+                    productDetailList = productlist.shopping_results
                     Log.d("@@@@", productlist.toString())
                 }
                 else{
