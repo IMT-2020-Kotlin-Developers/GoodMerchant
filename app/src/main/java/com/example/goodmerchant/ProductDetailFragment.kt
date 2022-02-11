@@ -1,5 +1,7 @@
 package com.example.goodmerchant
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -34,6 +36,14 @@ class ProductDetailFragment : Fragment() {
         }
         binding.productDetailProductPriceTv.text = args.productInformation.price
         binding.productDetailProductNameTv.text = args.productInformation.title
+
+        binding.buyButton.setOnClickListener{
+            val site = Intent(Intent.ACTION_VIEW)
+            val redirecturl = args.productInformation.link
+            site.data = Uri.parse("$redirecturl")
+            startActivity(site)
+        }
+
         return binding.root
     }
 

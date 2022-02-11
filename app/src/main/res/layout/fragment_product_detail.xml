@@ -100,6 +100,7 @@
             android:textColor="@color/textColor" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/buy_button"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/productDetailProductDetailTv"
