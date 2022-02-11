@@ -49,9 +49,11 @@ class ListAdapter(private val productList : Array<productModal>,
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val currentItem = productList[position]
+
         Picasso.get().load(currentItem.thumbnail).into(holder.productImage);
         holder.productName.text = currentItem.title
         holder.productPrice.text = currentItem.price
+
     }
 
     override fun getItemCount(): Int {

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "344750595041",
+    "project_id": "good-merchant",
+    "storage_bucket": "good-merchant.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:344750595041:android:8f733b90f241332e9390a0",
+        "android_client_info": {
+          "package_name": "com.example.goodmerchant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "344750595041-uvmsbuvh8vl8k9ddh465uj98vem5e9n2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQVsPMBnVqr4gUhMXgO4AFkef0hoqzk84"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "344750595041-uvmsbuvh8vl8k9ddh465uj98vem5e9n2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

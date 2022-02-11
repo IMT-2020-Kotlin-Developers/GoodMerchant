@@ -8,7 +8,10 @@ data class productModal(
     val title : String,
     val link : String,
     val price :String,
-    val rating : String,
+    val rating : Float,
     val thumbnail : String,
-    val source : String
+    val source : String,
+    val extracted_price : Float,
+    val extensions  : Array<String>
+
 ): Parcelable

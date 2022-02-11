@@ -12,8 +12,7 @@
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_listFragment"
-            app:destination="@id/listFragment"
-            app:popUpTo="@id/mainFragment" />
+            app:destination="@id/listFragment" />
     </fragment>
     <fragment
         android:id="@+id/listFragment"
@@ -22,11 +21,13 @@
         tools:layout="@layout/fragment_list">
         <action
             android:id="@+id/action_listFragment_to_productDetailFragment"
-            app:destination="@id/productDetailFragment"
-            app:popUpTo="@id/listFragment" />
+            app:destination="@id/productDetailFragment" />
         <argument
             android:name="productDetailList"
             app:argType="com.example.goodmerchant.Retrofit.productModal[]" />
+        <action
+            android:id="@+id/action_listFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/productDetailFragment"
@@ -38,7 +39,6 @@
             app:argType="com.example.goodmerchant.Retrofit.productModal" />
         <action
             android:id="@+id/action_productDetailFragment_to_listFragment2"
-            app:destination="@id/listFragment"
-            app:popUpTo="@id/mainFragment" />
+            app:destination="@id/listFragment" />
     </fragment>
 </navigation>

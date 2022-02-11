@@ -15,7 +15,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-lateinit var  productDetailList: Array<productModal>
+lateinit var productDetailList: Array<productModal>
 class productRepo(application: Application) {
 
     fun getProducts(q : String){
@@ -40,8 +40,10 @@ class productRepo(application: Application) {
                 Log.d("@@@@", "Failed sharam ati hai?", t)
             }
         })
+
     }
     fun getproductsfromlist(): Array<productModal> {
         return productDetailList
     }
+
 }

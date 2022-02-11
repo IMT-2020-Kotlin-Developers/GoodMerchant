@@ -69,6 +69,7 @@ class ListFragment : Fragment(), ListAdapter.OnItemClickListener{
 //            val item = productModal(titleList[i],linkList[i],priceList[i],ratingList[i],thumbnailList[i],sourceList[i])
 //            mArrayList.add(item)
 //        }
+        mArrayList.sortBy { it.extracted_price }
         var adapter = ListAdapter(mArrayList,this)
         mRecyclerView.adapter = adapter
     }

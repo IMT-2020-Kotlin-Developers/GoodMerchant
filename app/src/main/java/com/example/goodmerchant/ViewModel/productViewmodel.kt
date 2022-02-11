@@ -6,7 +6,7 @@ import com.example.goodmerchant.Repository.productRepo
 
 class productViewmodel(application: Application) : AndroidViewModel(application) {
     val repository  = productRepo(application)
-    fun getProducts(q : String){
+     fun getProducts(q : String){
        repository.getProducts(q)
     }
 }
