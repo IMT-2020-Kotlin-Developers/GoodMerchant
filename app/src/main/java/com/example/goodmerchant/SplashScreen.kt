@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 
 class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -13,7 +13,6 @@ class IntroScreen2 : AppCompatActivity() {
 
     fun backbtn(view: android.view.View) {
         val intent = Intent(this, IntroScreen1::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }

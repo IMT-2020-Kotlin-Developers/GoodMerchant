@@ -25,7 +25,7 @@ class ProductDetailFragment : Fragment() {
         val bundle = arguments
         val args = ProductDetailFragmentArgs.fromBundle(bundle!!)
         Picasso.get().load(args.productInformation.thumbnail).into(binding.productDetailImageIv)
-        var detail  =""
+        /* var detail  =""
         for(i in args.productInformation.extensions){
              detail  += "$i "
         }
@@ -33,13 +33,13 @@ class ProductDetailFragment : Fragment() {
         binding.productDetailProductDetailTv.text = detail
         }else{
             binding.productDetailProductDetailTv.text = "No Tags Available"
-        }
+        } */
         binding.productDetailProductPriceTv.text = args.productInformation.price
         binding.productDetailProductNameTv.text = args.productInformation.title
 
-        binding.buyButton.setOnClickListener{
-            val site = Intent(Intent.ACTION_VIEW)
-            val redirecturl = args.productInformation.link
+        binding.buy.setOnClickListener{
+            var site = Intent(Intent.ACTION_VIEW)
+            var redirecturl = args.productInformation.link
             site.data = Uri.parse("$redirecturl")
             startActivity(site)
         }

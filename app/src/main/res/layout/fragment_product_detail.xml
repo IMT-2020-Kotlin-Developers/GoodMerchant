@@ -36,10 +36,10 @@
             android:id="@+id/productDetailImageIv"
             android:layout_width="180dp"
             android:layout_height="180dp"
-            android:scaleType="centerInside"
-            android:adjustViewBounds="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="100dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
             app:srcCompat="@drawable/dummymouseimg" />
         <TextView
@@ -91,16 +91,14 @@
             android:id="@+id/productDetailProductDetailTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/productDetailProductPriceTv"
             android:layout_alignBottom="@+id/productDetailProductDescriptionIv"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:layout_toRightOf="@id/productDetailProductDescriptionIv"
             android:text="This is the description for Product"
             android:textColor="@color/textColor" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/buy_button"
+        <Button
+            android:id="@+id/buy"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/productDetailProductDetailTv"
