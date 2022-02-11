@@ -150,10 +150,15 @@ class MainFragment : Fragment() {
     fun fillListfragment(tag : String){
 
         viewModel.repository.getProducts(tag)
+        binding.progressBarMain.visibility = View.VISIBLE
+        binding.frontscreen.visibility = View.GONE
         Handler().postDelayed({
             var productDetailList: Array<productModal> = viewModel.repository.getproductsfromlist()
             val directions = MainFragmentDirections.actionMainFragmentToListFragment(productDetailList)
-            findNavController().navigate(directions)}
+            findNavController().navigate(directions)
+            binding.progressBarMain.visibility = View.GONE
+            binding.frontscreen.visibility = View.VISIBLE
+                              }
             ,6000)
     }
 }
