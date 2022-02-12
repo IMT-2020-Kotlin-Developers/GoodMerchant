@@ -33,6 +33,9 @@ import com.example.goodmerchant.ViewModel.productViewmodel
 import com.example.goodmerchant.databinding.FragmentMainBinding
 import com.google.firebase.storage.FirebaseStorage
 import com.google.mlkit.common.model.LocalModel
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.text.TextRecognition
+import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.splash.*
 import kotlinx.coroutines.*
@@ -55,6 +58,8 @@ import javax.net.ssl.HttpsURLConnection
 
 class MainFragment : Fragment() {
 
+    private var bitmap: Bitmap? = null
+    var c = 1
 
     private lateinit var viewModel : productViewmodel
     lateinit var imageUri : Uri
@@ -67,6 +72,7 @@ class MainFragment : Fragment() {
     ): View {
         viewModel = ViewModelProvider(this).get(productViewmodel::class.java)
         binding = FragmentMainBinding.inflate(layoutInflater, container, false)
+
         //manual search
         var temp : Boolean = false
         binding.searchicon.setOnClickListener {
@@ -76,15 +82,28 @@ class MainFragment : Fragment() {
             }
         }
 
+        //switch
+        binding.switch1.setOnCheckedChangeListener { _, isChecked ->
+            c = if (isChecked) 2
+            else 1
+        }
+
         binding.camera.setOnClickListener{
 
         }
         binding.gallery.setOnClickListener{
-            slectimage()
+            pickImage()
 
         }
 
         return binding.root
+    }
+
+    private fun pickImage() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 110)
     }
 
     private fun slectimage() {
@@ -121,13 +140,61 @@ class MainFragment : Fragment() {
         }
 
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == 100 && resultCode == RESULT_OK){
-            imageUri = data?.data!!
-            uploadimage()
+        if(requestCode == 110 && resultCode == RESULT_OK){
+          //  imageUri = data?.data!!
+          //  uploadimage()
+            data?.data?.let {
+                bitmap = null
+                bitmap = getBitmapFromUri(it);
+            }
+
+            val recognizer =
+                TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
+            bitmap?.let {
+                val image = InputImage.fromBitmap(it, 0)
+                recognizer.process(image)
+                    .addOnSuccessListener { visionText ->
+                        // textBlocks -> will return list of block of detected text
+                        // lines -> will return list of detected lines
+                        // elements -> will return list of detected words
+                        // boundingBox -> will return rectangle box area in bitmap
+                        Toast.makeText(
+                            requireActivity(),
+                            visionText.text,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(
+                            requireActivity(),
+                            "Error: " + e.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+            }
+
+            if (bitmap == null)
+                Toast.makeText(
+                    requireActivity(),
+                    "Please select an image!",
+                    Toast.LENGTH_SHORT
+                ).show()
         }
     }
+
+    //URI to bitmap
+    @Throws(IOException::class)
+    private fun getBitmapFromUri(uri: Uri): Bitmap? {
+        val parcelFileDescriptor = activity?.contentResolver?.openFileDescriptor(uri, "r")
+        val fileDescriptor: FileDescriptor = parcelFileDescriptor!!.fileDescriptor
+        val image = BitmapFactory.decodeFileDescriptor(fileDescriptor)
+        parcelFileDescriptor.close()
+        return image
+    }
+
     fun getTags(){
         val tag = tagservices.tagInstance.getTag(imageLink.toString())
         tag.enqueue(object : Callback<imagetagResult>{
@@ -147,6 +214,7 @@ class MainFragment : Fragment() {
             }
         })
     }
+
     fun fillListfragment(tag : String){
 
         viewModel.repository.getProducts(tag)
