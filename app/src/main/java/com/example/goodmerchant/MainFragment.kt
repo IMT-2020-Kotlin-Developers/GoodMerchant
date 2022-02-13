@@ -60,12 +60,13 @@ class MainFragment : Fragment() {
 
     private var bitmap: Bitmap? = null
     var c = 1
+    var ch = 0
 
-    private lateinit var viewModel : productViewmodel
-    lateinit var imageUri : Uri
+    private lateinit var viewModel: productViewmodel
+    lateinit var imageUri: Uri
     lateinit var binding: FragmentMainBinding
-    lateinit var imageLink : URL
-    lateinit var imageTag : String
+    lateinit var imageLink: URL
+    lateinit var imageTag: String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -74,10 +75,10 @@ class MainFragment : Fragment() {
         binding = FragmentMainBinding.inflate(layoutInflater, container, false)
 
         //manual search
-        var temp : Boolean = false
+        var temp: Boolean = false
         binding.searchicon.setOnClickListener {
             if (binding.searchtext.text != null) {
-                imageTag =  binding.searchtext.text.toString()
+                imageTag = binding.searchtext.text.toString()
                 fillListfragment(imageTag)
             }
         }
@@ -88,15 +89,25 @@ class MainFragment : Fragment() {
             else 1
         }
 
-        binding.camera.setOnClickListener{
-
+        binding.camera.setOnClickListener {
+            if (c == 2) {
+                ch = 1
+                pickImagecam()
+            }
         }
-        binding.gallery.setOnClickListener{
-            pickImage()
-
+        binding.gallery.setOnClickListener {
+            if (c == 2) {
+                ch = 2
+                pickImage()
+            }
         }
 
         return binding.root
+    }
+
+    private fun pickImagecam() {
+        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(takePictureIntent, 110)
     }
 
     private fun pickImage() {
@@ -107,12 +118,13 @@ class MainFragment : Fragment() {
     }
 
     private fun slectimage() {
-        val intent  = Intent()
-        intent.type  = "image/*"
+        val intent = Intent()
+        intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(intent,100)
+        startActivityForResult(intent, 100)
     }
-    private fun uploadimage(){
+
+    private fun uploadimage() {
         val progressBar = ProgressDialog(context)
         progressBar.setMessage("Analizing")
         progressBar.setCancelable(false)
@@ -122,33 +134,37 @@ class MainFragment : Fragment() {
         val now = Date()
         val filename = formatter.format(now)
         val storageReference = FirebaseStorage.getInstance().getReference("images/$filename")
-        storageReference.putFile(imageUri).
-        addOnSuccessListener {
+        storageReference.putFile(imageUri).addOnSuccessListener {
             storageReference.downloadUrl.addOnSuccessListener {
-                if(progressBar.isShowing) progressBar.dismiss()
-                imageLink =  URL(it.toString())
+                if (progressBar.isShowing) progressBar.dismiss()
+                imageLink = URL(it.toString())
                 Log.d("%%%%%", imageLink.toString())
                 getTags()
 
-            }.addOnFailureListener{
-                if(progressBar.isShowing) progressBar.dismiss()
-                Log.d("%%%%%", "Failed",it)
+            }.addOnFailureListener {
+                if (progressBar.isShowing) progressBar.dismiss()
+                Log.d("%%%%%", "Failed", it)
             }
-        }.addOnFailureListener{
-            if(progressBar.isShowing) progressBar.dismiss()
-            Log.d("%%%%%", "Failed",it)
+        }.addOnFailureListener {
+            if (progressBar.isShowing) progressBar.dismiss()
+            Log.d("%%%%%", "Failed", it)
         }
 
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == 110 && resultCode == RESULT_OK){
-          //  imageUri = data?.data!!
-          //  uploadimage()
-            data?.data?.let {
-                bitmap = null
-                bitmap = getBitmapFromUri(it);
+        if (requestCode == 110 && resultCode == RESULT_OK) {
+            //  imageUri = data?.data!!
+            //  uploadimage()
+            if (ch == 1)
+                bitmap = data?.extras?.get("data") as Bitmap
+            else {
+                data?.data?.let {
+                    bitmap = null
+                    bitmap = getBitmapFromUri(it);
+                }
+
             }
 
             val recognizer =
@@ -195,13 +211,16 @@ class MainFragment : Fragment() {
         return image
     }
 
-    fun getTags(){
+    fun getTags() {
         val tag = tagservices.tagInstance.getTag(imageLink.toString())
-        tag.enqueue(object : Callback<imagetagResult>{
-            override fun onResponse(call: Call<imagetagResult>, response: Response<imagetagResult>) {
-                val currenttag : imagetagResult? = response.body()
-                if(currenttag != null){
-                    val tagDetail : String = currenttag.searchInformation!!.query_displayed
+        tag.enqueue(object : Callback<imagetagResult> {
+            override fun onResponse(
+                call: Call<imagetagResult>,
+                response: Response<imagetagResult>
+            ) {
+                val currenttag: imagetagResult? = response.body()
+                if (currenttag != null) {
+                    val tagDetail: String = currenttag.searchInformation!!.query_displayed
                     imageTag = tagDetail
                     fillListfragment(imageTag)
 
@@ -215,19 +234,19 @@ class MainFragment : Fragment() {
         })
     }
 
-    fun fillListfragment(tag : String){
+    fun fillListfragment(tag: String) {
 
         viewModel.repository.getProducts(tag)
         binding.progressBarMain.visibility = View.VISIBLE
         binding.frontscreen.visibility = View.GONE
         Handler().postDelayed({
             var productDetailList: Array<productModal> = viewModel.repository.getproductsfromlist()
-            val directions = MainFragmentDirections.actionMainFragmentToListFragment(productDetailList)
+            val directions =
+                MainFragmentDirections.actionMainFragmentToListFragment(productDetailList)
             findNavController().navigate(directions)
             binding.progressBarMain.visibility = View.GONE
             binding.frontscreen.visibility = View.VISIBLE
-                              }
-            ,6000)
+        }, 6000)
     }
 }
 
