@@ -34,6 +34,8 @@ import com.example.goodmerchant.databinding.FragmentMainBinding
 import com.google.firebase.storage.FirebaseStorage
 import com.google.mlkit.common.model.LocalModel
 import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.label.ImageLabeling
+import com.google.mlkit.vision.label.defaults.ImageLabelerOptions
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -90,16 +92,14 @@ class MainFragment : Fragment() {
         }
 
         binding.camera.setOnClickListener {
-            if (c == 2) {
                 ch = 1
                 pickImagecam()
-            }
+
         }
         binding.gallery.setOnClickListener {
-            if (c == 2) {
                 ch = 2
                 pickImage()
-            }
+
         }
 
         return binding.root
@@ -167,6 +167,7 @@ class MainFragment : Fragment() {
 
             }
 
+            if(c==2) {
             val recognizer =
                 TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
             bitmap?.let {
@@ -177,11 +178,14 @@ class MainFragment : Fragment() {
                         // lines -> will return list of detected lines
                         // elements -> will return list of detected words
                         // boundingBox -> will return rectangle box area in bitmap
-                        Toast.makeText(
+                        imageTag = visionText.text
+                        fillListfragment(imageTag)
+
+                     /*   Toast.makeText(
                             requireActivity(),
                             visionText.text,
                             Toast.LENGTH_LONG
-                        ).show()
+                        ).show() */
                     }
                     .addOnFailureListener { e ->
                         Toast.makeText(
@@ -191,6 +195,35 @@ class MainFragment : Fragment() {
                         ).show()
                     }
             }
+            }
+
+            if(c==1) {
+                val recognizer =
+                    ImageLabeling.getClient(ImageLabelerOptions.DEFAULT_OPTIONS)
+                bitmap?.let {
+                    val image = InputImage.fromBitmap(it, 0)
+                    recognizer.process(image)
+                        .addOnSuccessListener { labels ->
+                            //for (label in labels) {} - when multiple labels needed
+
+                            imageTag = labels[0].text
+                            fillListfragment(imageTag)
+                           /* Toast.makeText(
+                                requireActivity(),
+                                labels[0].text,
+                                Toast.LENGTH_LONG
+                            ).show() */
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(
+                                requireActivity(),
+                                "Error: " + e.message,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                }
+            }
+
 
             if (bitmap == null)
                 Toast.makeText(
