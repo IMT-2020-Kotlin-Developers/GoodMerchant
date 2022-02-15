@@ -35,7 +35,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.mlkit.common.model.LocalModel
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.label.ImageLabeling
-import com.google.mlkit.vision.label.defaults.ImageLabelerOptions
+import com.google.mlkit.vision.label.custom.CustomImageLabelerOptions
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -181,7 +181,7 @@ class MainFragment : Fragment() {
                         imageTag = visionText.text
                         fillListfragment(imageTag)
 
-                     /*   Toast.makeText(
+                    /*   Toast.makeText(
                             requireActivity(),
                             visionText.text,
                             Toast.LENGTH_LONG
@@ -198,17 +198,30 @@ class MainFragment : Fragment() {
             }
 
             if(c==1) {
-                val recognizer =
-                    ImageLabeling.getClient(ImageLabelerOptions.DEFAULT_OPTIONS)
                 bitmap?.let {
+
                     val image = InputImage.fromBitmap(it, 0)
-                    recognizer.process(image)
+
+                    val localModel = LocalModel.Builder()
+                        .setAssetFilePath("mnasnet_1.3_224_1_metadata_1.tflite")
+                        // or .setAbsoluteFilePath(absolute file path to model file)
+                        // or .setUri(URI to model file)
+                        .build()
+
+                    val customImageLabelerOptions = CustomImageLabelerOptions.Builder(localModel)
+                        .setConfidenceThreshold(0.5f)
+                        .setMaxResultCount(5)
+                        .build()
+                    val labeler = ImageLabeling.getClient(customImageLabelerOptions)
+
+                    labeler.process(image)
                         .addOnSuccessListener { labels ->
                             //for (label in labels) {} - when multiple labels needed
 
-                            imageTag = labels[0].text
-                            fillListfragment(imageTag)
-                           /* Toast.makeText(
+                             imageTag = labels[0].text
+                             fillListfragment(imageTag)
+
+                          /*  Toast.makeText(
                                 requireActivity(),
                                 labels[0].text,
                                 Toast.LENGTH_LONG
@@ -279,7 +292,7 @@ class MainFragment : Fragment() {
             findNavController().navigate(directions)
             binding.progressBarMain.visibility = View.GONE
             binding.frontscreen.visibility = View.VISIBLE
-        }, 6000)
+        }, 10000)
     }
 }
 
