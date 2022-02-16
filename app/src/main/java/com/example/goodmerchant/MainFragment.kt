@@ -63,7 +63,8 @@ class MainFragment : Fragment() {
     private var bitmap: Bitmap? = null
     var c = 1
     var ch = 1
-
+    var s1 = ""
+    var s2 = ""
     private lateinit var viewModel: productViewmodel
     lateinit var imageUri: Uri
     lateinit var binding: FragmentMainBinding
@@ -189,7 +190,43 @@ class MainFragment : Fragment() {
                 recognizer.process(image)
                     .addOnSuccessListener { visionText ->
                         imageTag = ""
-                        imageTag = visionText.text
+                        s1 = ""
+                        s1 = visionText.text
+
+                    /*  Toast.makeText(
+                            requireActivity(),
+                            visionText.text,
+                            Toast.LENGTH_LONG
+                        ).show() */
+                    }
+
+                    .addOnFailureListener { e ->
+                        Toast.makeText(
+                            requireActivity(),
+                            "Error: " + e.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                val localModel = LocalModel.Builder()
+                    .setAssetFilePath("mnasnet_1.3_224_1_metadata_1.tflite")
+                    // or .setAbsoluteFilePath(absolute file path to model file)
+                    // or .setUri(URI to model file)
+                    .build()
+
+                val customImageLabelerOptions = CustomImageLabelerOptions.Builder(localModel)
+                    .setConfidenceThreshold(0.5f)
+                    .setMaxResultCount(5)
+                    .build()
+                val labeler = ImageLabeling.getClient(customImageLabelerOptions)
+
+                labeler.process(image)
+                    .addOnSuccessListener { labels ->
+                        //for (label in labels) {} - when multiple labels needed
+                        s2 = ""
+                        s2 = labels[0].text
+
+                        imageTag = s1 + s2
 
                         if(imageTag != "")
                             fillListfragment(imageTag)
@@ -201,12 +238,13 @@ class MainFragment : Fragment() {
                             ).show()
                         }
 
-                    /*  Toast.makeText(
-                            requireActivity(),
-                            visionText.text,
-                            Toast.LENGTH_LONG
-                        ).show() */
+                        /*   Toast.makeText(
+                               requireActivity(),
+                               labels[0].text,
+                               Toast.LENGTH_LONG
+                           ).show() */
                     }
+
                     .addOnFailureListener { e ->
                         Toast.makeText(
                             requireActivity(),
