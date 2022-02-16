@@ -62,7 +62,7 @@ class MainFragment : Fragment() {
 
     private var bitmap: Bitmap? = null
     var c = 1
-    var ch = 0
+    var ch = 1
 
     private lateinit var viewModel: productViewmodel
     lateinit var imageUri: Uri
@@ -77,6 +77,7 @@ class MainFragment : Fragment() {
         binding = FragmentMainBinding.inflate(layoutInflater, container, false)
 
         //manual search
+
         var temp: Boolean = false
         binding.searchicon.setOnClickListener {
             if (binding.searchtext.text != null) {
@@ -124,7 +125,7 @@ class MainFragment : Fragment() {
         startActivityForResult(intent, 100)
     }
 
-    private fun uploadimage() {
+    /* private fun uploadimage() {
         val progressBar = ProgressDialog(context)
         progressBar.setMessage("Analizing")
         progressBar.setCancelable(false)
@@ -150,16 +151,19 @@ class MainFragment : Fragment() {
             Log.d("%%%%%", "Failed", it)
         }
 
-    }
+    }    */
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 110 && resultCode == RESULT_OK) {
             //  imageUri = data?.data!!
             //  uploadimage()
-            if (ch == 1)
+            if (ch == 1) {
+                bitmap = null
                 bitmap = data?.extras?.get("data") as Bitmap
-            else {
+            }
+
+            else if(ch == 2) {
                 data?.data?.let {
                     bitmap = null
                     bitmap = getBitmapFromUri(it);
@@ -174,18 +178,15 @@ class MainFragment : Fragment() {
                 val image = InputImage.fromBitmap(it, 0)
                 recognizer.process(image)
                     .addOnSuccessListener { visionText ->
-                        // textBlocks -> will return list of block of detected text
-                        // lines -> will return list of detected lines
-                        // elements -> will return list of detected words
-                        // boundingBox -> will return rectangle box area in bitmap
-                        imageTag = visionText.text
-                        fillListfragment(imageTag)
 
-                    /*   Toast.makeText(
+                    //    imageTag = visionText.text
+                    //    fillListfragment(imageTag)
+
+                      Toast.makeText(
                             requireActivity(),
                             visionText.text,
                             Toast.LENGTH_LONG
-                        ).show() */
+                        ).show()
                     }
                     .addOnFailureListener { e ->
                         Toast.makeText(
@@ -194,7 +195,7 @@ class MainFragment : Fragment() {
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-            }
+                }
             }
 
             if(c==1) {
@@ -218,14 +219,14 @@ class MainFragment : Fragment() {
                         .addOnSuccessListener { labels ->
                             //for (label in labels) {} - when multiple labels needed
 
-                             imageTag = labels[0].text
-                             fillListfragment(imageTag)
+                         //    imageTag = labels[0].text
+                         //    fillListfragment(imageTag)
 
-                          /*  Toast.makeText(
+                            Toast.makeText(
                                 requireActivity(),
                                 labels[0].text,
                                 Toast.LENGTH_LONG
-                            ).show() */
+                            ).show()
                         }
                         .addOnFailureListener { e ->
                             Toast.makeText(

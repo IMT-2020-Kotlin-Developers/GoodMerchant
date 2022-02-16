@@ -8,7 +8,7 @@ import retrofit2.http.Query
 
 //https://serpapi.com/search.json?engine=google&q=mouse&location=Austin%2C+Texas%2C+United+States&google_domain=google.com&gl=us&hl=en&tbm=shop&api_key=88e24b82106d51e0d94dd7f31afb6c94c35f0abfaeab6e0ef283deee0f08595e
 const val BASE_URL = "https://serpapi.com/"
-const val API_KEY = "0531aa39c487c08eddf96d9fad966a11df3d78e3bd848a1835175ab0d8d1261c"
+const val API_KEY = "ccd82c41e48d55d521b03f57036db64e1d505606b393d25058b11a8f4c7043fd"
 
 interface productInterface {
     @GET("search.json?api_key=$API_KEY&engine=google&location=Delhi%2C+India&google_domain=google.com&gl=in&hl=en&tbm=shop")
