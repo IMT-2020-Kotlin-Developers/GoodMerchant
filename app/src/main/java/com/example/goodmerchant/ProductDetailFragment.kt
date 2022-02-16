@@ -25,17 +25,10 @@ class ProductDetailFragment : Fragment() {
         val bundle = arguments
         val args = ProductDetailFragmentArgs.fromBundle(bundle!!)
         Picasso.get().load(args.productInformation.thumbnail).into(binding.productDetailImageIv)
-        /* var detail  =""
-        for(i in args.productInformation.extensions){
-             detail  += "$i "
-        }
-        if(detail != null){
-        binding.productDetailProductDetailTv.text = detail
-        }else{
-            binding.productDetailProductDetailTv.text = "No Tags Available"
-        } */
+
         binding.productDetailProductPriceTv.text = args.productInformation.price
         binding.productDetailProductNameTv.text = args.productInformation.title
+        binding.productDetailProductDetailTv.text = args.productInformation.source
 
         binding.buy.setOnClickListener{
             var site = Intent(Intent.ACTION_VIEW)

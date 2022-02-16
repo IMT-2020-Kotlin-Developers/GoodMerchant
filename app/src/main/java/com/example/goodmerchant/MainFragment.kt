@@ -81,8 +81,18 @@ class MainFragment : Fragment() {
         var temp: Boolean = false
         binding.searchicon.setOnClickListener {
             if (binding.searchtext.text != null) {
+                imageTag = ""
                 imageTag = binding.searchtext.text.toString()
+
+                if(imageTag != "")
                 fillListfragment(imageTag)
+                else{
+                    Toast.makeText(
+                        requireActivity(),
+                        "Retry",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
 
@@ -178,15 +188,24 @@ class MainFragment : Fragment() {
                 val image = InputImage.fromBitmap(it, 0)
                 recognizer.process(image)
                     .addOnSuccessListener { visionText ->
+                        imageTag = ""
+                        imageTag = visionText.text
 
-                    //    imageTag = visionText.text
-                    //    fillListfragment(imageTag)
+                        if(imageTag != "")
+                            fillListfragment(imageTag)
+                        else{
+                            Toast.makeText(
+                                requireActivity(),
+                                "Retry",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
 
-                      Toast.makeText(
+                    /*  Toast.makeText(
                             requireActivity(),
                             visionText.text,
                             Toast.LENGTH_LONG
-                        ).show()
+                        ).show() */
                     }
                     .addOnFailureListener { e ->
                         Toast.makeText(
@@ -218,15 +237,24 @@ class MainFragment : Fragment() {
                     labeler.process(image)
                         .addOnSuccessListener { labels ->
                             //for (label in labels) {} - when multiple labels needed
+                             imageTag = ""
+                             imageTag = labels[0].text
 
-                         //    imageTag = labels[0].text
-                         //    fillListfragment(imageTag)
+                            if(imageTag != "")
+                                fillListfragment(imageTag)
+                            else{
+                                Toast.makeText(
+                                    requireActivity(),
+                                    "Retry",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
 
-                            Toast.makeText(
+                         /*   Toast.makeText(
                                 requireActivity(),
                                 labels[0].text,
                                 Toast.LENGTH_LONG
-                            ).show()
+                            ).show() */
                         }
                         .addOnFailureListener { e ->
                             Toast.makeText(
@@ -287,7 +315,7 @@ class MainFragment : Fragment() {
         binding.progressBarMain.visibility = View.VISIBLE
         binding.frontscreen.visibility = View.GONE
         Handler().postDelayed({
-            var productDetailList: Array<productModal> = viewModel.repository.getproductsfromlist()
+            val productDetailList: Array<productModal> = viewModel.repository.getproductsfromlist()
             val directions =
                 MainFragmentDirections.actionMainFragmentToListFragment(productDetailList)
             findNavController().navigate(directions)
