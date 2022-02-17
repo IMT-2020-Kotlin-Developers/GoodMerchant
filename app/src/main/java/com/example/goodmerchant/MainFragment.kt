@@ -63,8 +63,7 @@ class MainFragment : Fragment() {
     private var bitmap: Bitmap? = null
     var c = 1
     var ch = 1
-    var s1 = ""
-    var s2 = ""
+
     private lateinit var viewModel: productViewmodel
     lateinit var imageUri: Uri
     lateinit var binding: FragmentMainBinding
@@ -86,7 +85,7 @@ class MainFragment : Fragment() {
                 imageTag = binding.searchtext.text.toString()
 
                 if(imageTag != "")
-                fillListfragment(imageTag)
+                    fillListfragment(imageTag)
                 else{
                     Toast.makeText(
                         requireActivity(),
@@ -129,52 +128,25 @@ class MainFragment : Fragment() {
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), 110)
     }
 
-    private fun slectimage() {
-        val intent = Intent()
-        intent.type = "image/*"
-        intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(intent, 100)
-    }
-
-    /* private fun uploadimage() {
-        val progressBar = ProgressDialog(context)
-        progressBar.setMessage("Analizing")
-        progressBar.setCancelable(false)
-        progressBar.show()
-
-        val formatter = SimpleDateFormat("yyyy__MM__dd__HH__mm__ss", Locale.getDefault())
-        val now = Date()
-        val filename = formatter.format(now)
-        val storageReference = FirebaseStorage.getInstance().getReference("images/$filename")
-        storageReference.putFile(imageUri).addOnSuccessListener {
-            storageReference.downloadUrl.addOnSuccessListener {
-                if (progressBar.isShowing) progressBar.dismiss()
-                imageLink = URL(it.toString())
-                Log.d("%%%%%", imageLink.toString())
-                getTags()
-
-            }.addOnFailureListener {
-                if (progressBar.isShowing) progressBar.dismiss()
-                Log.d("%%%%%", "Failed", it)
-            }
-        }.addOnFailureListener {
-            if (progressBar.isShowing) progressBar.dismiss()
-            Log.d("%%%%%", "Failed", it)
-        }
-
-    }    */
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 110 && resultCode == RESULT_OK) {
-            //  imageUri = data?.data!!
-            //  uploadimage()
+            //var s1 =""
+            //var s2 =""
+
             if (ch == 1) {
                 bitmap = null
                 bitmap = data?.extras?.get("data") as Bitmap
             }
 
             else if(ch == 2) {
+
+               /* Toast.makeText(
+                    requireActivity(),
+                    "ch working",
+                    Toast.LENGTH_SHORT
+                ).show() */
+
                 data?.data?.let {
                     bitmap = null
                     bitmap = getBitmapFromUri(it);
@@ -183,53 +155,31 @@ class MainFragment : Fragment() {
             }
 
             if(c==2) {
+
             val recognizer =
                 TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
             bitmap?.let {
                 val image = InputImage.fromBitmap(it, 0)
+
+              /*  Toast.makeText(
+                    requireActivity(),
+                    "c working",
+                    Toast.LENGTH_SHORT
+                ).show() */
+
                 recognizer.process(image)
                     .addOnSuccessListener { visionText ->
-                        imageTag = ""
-                        s1 = ""
-                        s1 = visionText.text
 
-                    /*  Toast.makeText(
-                            requireActivity(),
-                            visionText.text,
-                            Toast.LENGTH_LONG
-                        ).show() */
-                    }
 
-                    .addOnFailureListener { e ->
-                        Toast.makeText(
-                            requireActivity(),
-                            "Error: " + e.message,
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+                        if(visionText.text != "") {
+                               fillListfragment(visionText.text)
 
-                val localModel = LocalModel.Builder()
-                    .setAssetFilePath("mnasnet_1.3_224_1_metadata_1.tflite")
-                    // or .setAbsoluteFilePath(absolute file path to model file)
-                    // or .setUri(URI to model file)
-                    .build()
-
-                val customImageLabelerOptions = CustomImageLabelerOptions.Builder(localModel)
-                    .setConfidenceThreshold(0.5f)
-                    .setMaxResultCount(5)
-                    .build()
-                val labeler = ImageLabeling.getClient(customImageLabelerOptions)
-
-                labeler.process(image)
-                    .addOnSuccessListener { labels ->
-                        //for (label in labels) {} - when multiple labels needed
-                        s2 = ""
-                        s2 = labels[0].text
-
-                        imageTag = s1 + s2
-
-                        if(imageTag != "")
-                            fillListfragment(imageTag)
+                            Toast.makeText(
+                                requireActivity(),
+                                visionText.text,
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
                         else{
                             Toast.makeText(
                                 requireActivity(),
@@ -237,12 +187,6 @@ class MainFragment : Fragment() {
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
-
-                        /*   Toast.makeText(
-                               requireActivity(),
-                               labels[0].text,
-                               Toast.LENGTH_LONG
-                           ).show() */
                     }
 
                     .addOnFailureListener { e ->
@@ -256,30 +200,33 @@ class MainFragment : Fragment() {
             }
 
             if(c==1) {
+                val localModel = LocalModel.Builder()
+                    .setAssetFilePath("mnasnet_1.3_224_1_metadata_1.tflite")
+                    .build()
+
+                val customImageLabelerOptions = CustomImageLabelerOptions.Builder(localModel)
+                    .setConfidenceThreshold(0.5f)
+                    .setMaxResultCount(5)
+                    .build()
+                val labeler = ImageLabeling.getClient(customImageLabelerOptions)
+
                 bitmap?.let {
 
                     val image = InputImage.fromBitmap(it, 0)
-
-                    val localModel = LocalModel.Builder()
-                        .setAssetFilePath("mnasnet_1.3_224_1_metadata_1.tflite")
-                        // or .setAbsoluteFilePath(absolute file path to model file)
-                        // or .setUri(URI to model file)
-                        .build()
-
-                    val customImageLabelerOptions = CustomImageLabelerOptions.Builder(localModel)
-                        .setConfidenceThreshold(0.5f)
-                        .setMaxResultCount(5)
-                        .build()
-                    val labeler = ImageLabeling.getClient(customImageLabelerOptions)
-
                     labeler.process(image)
                         .addOnSuccessListener { labels ->
-                            //for (label in labels) {} - when multiple labels needed
-                             imageTag = ""
-                             imageTag = labels[0].text
 
-                            if(imageTag != "")
-                                fillListfragment(imageTag)
+
+
+                            if(labels[0].text!= "") {
+                                 fillListfragment(labels[0].text)
+
+                                Toast.makeText(
+                                    requireActivity(),
+                                    labels[0].text,
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
                             else{
                                 Toast.makeText(
                                     requireActivity(),
@@ -287,13 +234,8 @@ class MainFragment : Fragment() {
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
-
-                         /*   Toast.makeText(
-                                requireActivity(),
-                                labels[0].text,
-                                Toast.LENGTH_LONG
-                            ).show() */
                         }
+
                         .addOnFailureListener { e ->
                             Toast.makeText(
                                 requireActivity(),
@@ -322,29 +264,6 @@ class MainFragment : Fragment() {
         val image = BitmapFactory.decodeFileDescriptor(fileDescriptor)
         parcelFileDescriptor.close()
         return image
-    }
-
-    fun getTags() {
-        val tag = tagservices.tagInstance.getTag(imageLink.toString())
-        tag.enqueue(object : Callback<imagetagResult> {
-            override fun onResponse(
-                call: Call<imagetagResult>,
-                response: Response<imagetagResult>
-            ) {
-                val currenttag: imagetagResult? = response.body()
-                if (currenttag != null) {
-                    val tagDetail: String = currenttag.searchInformation!!.query_displayed
-                    imageTag = tagDetail
-                    fillListfragment(imageTag)
-
-                    Log.d("%%%%%", tagDetail)
-                }
-            }
-
-            override fun onFailure(call: Call<imagetagResult>, t: Throwable) {
-                Log.d("%%%%%", "Failed sharam ati hai?", t)
-            }
-        })
     }
 
     fun fillListfragment(tag: String) {
