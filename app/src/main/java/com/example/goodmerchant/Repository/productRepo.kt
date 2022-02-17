@@ -1,5 +1,4 @@
 package com.example.goodmerchant.Repository
-
 import android.app.Application
 import android.util.Log
 import androidx.navigation.fragment.findNavController
@@ -26,12 +25,12 @@ class productRepo(application: Application) {
         val service = retrofit.create(productInterface::class.java)
         service.getProduct(q).enqueue(object : Callback<serpApiResult> {
             override fun onResponse(call: Call<serpApiResult>, response: Response<serpApiResult>) {
+
                 val productlist: serpApiResult? = response.body()
                 if (productlist != null) {
                     productDetailList = productlist.shopping_results
                     Log.d("@@@@", productlist.toString())
-                }
-                else{
+                } else{
                     Log.d("@@@","ProductList is null")
                 }
             }

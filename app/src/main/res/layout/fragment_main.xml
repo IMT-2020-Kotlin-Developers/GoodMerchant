@@ -58,12 +58,34 @@
                     android:background="@drawable/searchbar3"
                     android:src="@drawable/search_icon" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="321dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                android:orientation="horizontal">
 
+                <EditText
+                    android:id="@+id/searchUrl"
+                    android:layout_width="273dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/searchbar2"
+                    android:hint="Search By URL"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/textColor" />
+
+                <ImageView
+                    android:id="@+id/searchiconforUrl"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/searchbar3"
+                    android:src="@drawable/search_icon" />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="110dp"
+                android:layout_marginTop="60dp"
 
                 android:orientation="horizontal">
 
@@ -87,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="65dp"
+                android:layout_marginTop="40dp"
 
                 android:orientation="horizontal">
 

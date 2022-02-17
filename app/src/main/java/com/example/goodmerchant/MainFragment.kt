@@ -31,7 +31,7 @@ import com.example.goodmerchant.Recyclerview.ListFragmentDirections
 import com.example.goodmerchant.Retrofit.*
 import com.example.goodmerchant.ViewModel.productViewmodel
 import com.example.goodmerchant.databinding.FragmentMainBinding
-import com.google.firebase.storage.FirebaseStorage
+
 import com.google.mlkit.common.model.LocalModel
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.label.ImageLabeling
@@ -94,6 +94,9 @@ class MainFragment : Fragment() {
                     ).show()
                 }
             }
+        }
+        binding.searchiconforUrl.setOnClickListener {
+           getTags()
         }
 
         //switch
@@ -280,6 +283,30 @@ class MainFragment : Fragment() {
             binding.frontscreen.visibility = View.VISIBLE
         }, 10000)
     }
+
+    fun getTags() {
+        val tag = tagservices.tagInstance.getTag(binding.searchUrl.text.toString())
+        tag.enqueue(object : Callback<imagetagResult> {
+            override fun onResponse(
+                call: Call<imagetagResult>,
+                response: Response<imagetagResult>
+            ) {
+                val currenttag: imagetagResult? = response.body()
+                if (currenttag != null) {
+                    val tagDetail: String = currenttag.searchInformation!!.query_displayed
+                    imageTag = tagDetail
+                    fillListfragment(imageTag)
+
+                    Log.d("%%%%%", tagDetail)
+                }
+            }
+
+            override fun onFailure(call: Call<imagetagResult>, t: Throwable) {
+                Log.d("%%%%%", "Failed sharam ati hai?", t)
+            }
+        })
+    }
+
 }
 
 
