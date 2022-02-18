@@ -35,7 +35,7 @@ import com.example.goodmerchant.databinding.FragmentMainBinding
 import com.google.mlkit.common.model.LocalModel
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.label.ImageLabeling
-import com.google.mlkit.vision.label.custom.CustomImageLabelerOptions
+import com.google.mlkit.vision.label.defaults.ImageLabelerOptions
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -173,8 +173,8 @@ class MainFragment : Fragment() {
                 recognizer.process(image)
                     .addOnSuccessListener { visionText ->
 
-
                         if(visionText.text != "") {
+
                                fillListfragment(visionText.text)
 
                             Toast.makeText(
@@ -203,26 +203,18 @@ class MainFragment : Fragment() {
             }
 
             if(c==1) {
-                val localModel = LocalModel.Builder()
-                    .setAssetFilePath("mnasnet_1.3_224_1_metadata_1.tflite")
-                    .build()
 
-                val customImageLabelerOptions = CustomImageLabelerOptions.Builder(localModel)
-                    .setConfidenceThreshold(0.5f)
-                    .setMaxResultCount(5)
-                    .build()
-                val labeler = ImageLabeling.getClient(customImageLabelerOptions)
+                val recognizer =
+                    ImageLabeling.getClient(ImageLabelerOptions.DEFAULT_OPTIONS)
 
                 bitmap?.let {
-
                     val image = InputImage.fromBitmap(it, 0)
-                    labeler.process(image)
+                    recognizer.process(image)
                         .addOnSuccessListener { labels ->
 
-
-
                             if(labels[0].text!= "") {
-                                 fillListfragment(labels[0].text)
+
+                                fillListfragment(labels[0].text)
 
                                 Toast.makeText(
                                     requireActivity(),
