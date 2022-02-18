@@ -36,39 +36,19 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/urlview"
                 android:layout_width="321dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="80dp"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/searchtext"
-                    android:layout_width="273dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/searchbar2"
-                    android:hint="Search By Text"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/textColor" />
-
-                <ImageView
-                    android:id="@+id/searchicon"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/searchbar3"
-                    android:src="@drawable/search_icon" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="321dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="88dp"
+                android:visibility="gone"
                 android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/searchUrl"
                     android:layout_width="273dp"
                     android:layout_height="48dp"
+                    android:elevation="@dimen/cardview_compat_inset_shadow"
                     android:background="@drawable/searchbar2"
                     android:hint="Search By URL"
                     android:textColor="@color/black"
@@ -78,14 +58,74 @@
                     android:id="@+id/searchiconforUrl"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
+                    android:elevation="@dimen/cardview_default_elevation"
                     android:background="@drawable/searchbar3"
                     android:src="@drawable/search_icon" />
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mainbarview"
+                android:layout_width="321dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="88dp"
+                android:visibility="visible"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/searchtext"
+                    android:layout_width="273dp"
+                    android:layout_height="48dp"
+                    android:elevation="@dimen/cardview_compat_inset_shadow"
+                    android:background="@drawable/searchbar2"
+                    android:hint="Search By Text"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/textColor" />
+
+                <ImageView
+                    android:id="@+id/searchicon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:elevation="@dimen/cardview_default_elevation"
+                    android:background="@drawable/searchbar3"
+                    android:src="@drawable/search_icon" />
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="33dp"
+                android:paddingVertical="1dp"
+                android:paddingHorizontal="2dp"
+                android:elevation="@dimen/cardview_default_elevation"
+                android:background="@drawable/searchbar"
+                android:backgroundTint="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:text="Have Image URL  >"
+                    android:textColor="@color/textColor"
+                    android:textSize="20dp" />
+
+                <Switch
+                    android:id="@+id/switch2"
+                    style="@style/switch1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleX="1"
+                    android:scaleY="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="91dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="80dp"
 
                 android:orientation="horizontal">
 
@@ -95,6 +135,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="80dp"
                     android:background="@drawable/searchbar"
+                    android:elevation="@dimen/cardview_default_elevation"
                     android:src="@drawable/ic_baseline_camera_alt_24" />
 
                 <ImageView
@@ -102,6 +143,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/searchbar"
+                    android:elevation="@dimen/cardview_default_elevation"
                     android:src="@drawable/ic_logogallery" />
             </LinearLayout>
 
@@ -109,14 +151,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="40dp"
-
+                android:paddingVertical="1dp"
+                android:paddingHorizontal="2dp"
+                android:layout_marginTop="32dp"
+                android:elevation="@dimen/cardview_default_elevation"
+                android:background="@drawable/searchbar"
+                android:backgroundTint="@color/white"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
                     android:text="Image Has Text  >"
                     android:textColor="@color/textColor"
                     android:textSize="20dp" />

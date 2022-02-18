@@ -79,6 +79,7 @@ class MainFragment : Fragment() {
         //manual search
 
         var temp: Boolean = false
+
         binding.searchicon.setOnClickListener {
             if (binding.searchtext.text != null) {
                 imageTag = ""
@@ -95,14 +96,34 @@ class MainFragment : Fragment() {
                 }
             }
         }
+
         binding.searchiconforUrl.setOnClickListener {
            getTags()
         }
 
-        //switch
+        //switch1
         binding.switch1.setOnCheckedChangeListener { _, isChecked ->
             c = if (isChecked) 2
             else 1
+        }
+
+        //switch2
+        binding.switch2.setOnCheckedChangeListener { _, isChecked ->
+            val u :Int = if (isChecked) 2
+            else 1
+
+            if(u==2)
+            {
+                binding.urlview.visibility = View.VISIBLE
+                binding.mainbarview.visibility = View.GONE
+
+            }
+
+            else
+            {
+                binding.mainbarview.visibility = View.VISIBLE
+                binding.urlview.visibility = View.GONE
+            }
         }
 
         binding.camera.setOnClickListener {
