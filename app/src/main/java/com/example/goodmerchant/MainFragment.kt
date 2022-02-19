@@ -24,9 +24,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import com.example.goodmerchant.Imgur.ImgurApi
-import com.example.goodmerchant.Imgur.ImgurUploadJson
-import com.example.goodmerchant.Imgur.imagetoUrl
 import com.example.goodmerchant.Recyclerview.ListFragmentDirections
 import com.example.goodmerchant.Retrofit.*
 import com.example.goodmerchant.ViewModel.productViewmodel
