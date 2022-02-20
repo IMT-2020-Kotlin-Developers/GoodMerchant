@@ -28,7 +28,7 @@
 
 # Demonstration Video
 
-The demonstration video of our Good Merchant can be viewed by clicking on this [link](https://user-images.githubusercontent.com/97015594/154836172-1699686c-1c74-4d80-a827-3c33e1195da5.mp4)
+The demonstration video of our Good Merchant App can be viewed by clicking on this [link](https://user-images.githubusercontent.com/97015594/154836172-1699686c-1c74-4d80-a827-3c33e1195da5.mp4)
 
 # Features
 
