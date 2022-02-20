@@ -20,20 +20,20 @@ other options to choose or get an idea about the product they are buying.
 <br /><br />
 
 # How to use ?
-Open the app
-![](https://github.com/sekocoder/GoodMerchant/blob/master/GoodMerchant_readme_ss/4.jpeg)
+Open the app <br />
+<img src="https://github.com/sekocoder/GoodMerchant/blob/master/GoodMerchant_readme_ss/4.jpeg" width=50% height=50%>
 <br /><br />
 
-Click on gallery or camera icon and choose an image
-![](https://github.com/sekocoder/GoodMerchant/blob/master/GoodMerchant_readme_ss/5.jpeg)
+Click on gallery or camera icon and choose an image <br />
+<img src="https://github.com/sekocoder/GoodMerchant/blob/master/GoodMerchant_readme_ss/5.jpeg" width=50% height=50%>
 <br /><br />
 
-A list of similar products will be show to you
-![](https://github.com/sekocoder/GoodMerchant/blob/master/GoodMerchant_readme_ss/7.jpeg)
+A list of similar products will be show to you <br />
+<img src="https://github.com/sekocoder/GoodMerchant/blob/master/GoodMerchant_readme_ss/7.jpeg" width=50% height=50%>
 <br /><br />
 
-You can click and get more details about them
-![](https://github.com/sekocoder/GoodMerchant/blob/master/GoodMerchant_readme_ss/8.jpeg)
+You can click and get more details about them <br />
+<img src="https://github.com/sekocoder/GoodMerchant/blob/master/GoodMerchant_readme_ss/8.jpeg" width=50% height=50%>
 <br /><br />
 
 # Tech Stack used
