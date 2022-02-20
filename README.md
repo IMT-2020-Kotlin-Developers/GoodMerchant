@@ -70,7 +70,7 @@ The demonstration video of our Good Merchant App can be viewed by clicking on th
 
 # What's next for Good Merchant
 
- Addition of a more efficient Machine learning model which will increase the similarity between the product list and the image passed. Adding a favourites list to save the product which the customer likes using room database which will provide user the chance to refer to it later on and thus also adding user authentication.
+ Addition of a more efficient Machine learning model which will increase the similarity between the product list and the image passed. Adding a favourites list to save the product which the customer likes using room database which will provide user the chance to refer to it later on and thus we will also be adding user authentication.
  
 # Team Members
 
