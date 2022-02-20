@@ -11,7 +11,7 @@
  <p>Good Merchant is an android application that allows customers to find the best price accessible on the web simply by clicking an image of the product or the product's     
  name/brand the customer wants to search for or select the desired image from the gallery. The customer can also do a manual search by entering the product name or by providing 
  the product image URL. Good Merchant gives aggregative information, and it will generate a list of viable channels from around the web and offer it to the customer in a user-
- friendly manner. After selecting a track from the list, the user may navigate straight to it.</p>
+ friendly manner. After selecting a track from the list, the customer may navigate straight to it.</p>
 
 <br />
 
