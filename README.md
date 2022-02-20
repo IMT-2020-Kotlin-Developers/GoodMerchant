@@ -35,7 +35,7 @@ The demonstration video of our Good Merchant App can be viewed by clicking on th
  * An aesthetically designed UI for the customer
  * Search for the desired product by either clicking its image using the camera or selecting its image from the gallery
  * Manually entering the product name or passing the URL of the product image to search for the product
- * Display of products similar to it from various e-commerce sites in the the recycler view sorted by price 
+ * Display of products similar to it from various e-commerce sites in the recycler view sorted by price 
  * Detailed page of every product
  * Redirection to the website of the choosen product by clicking on the 'BUY NOW' button
 
@@ -57,7 +57,7 @@ The demonstration video of our Good Merchant App can be viewed by clicking on th
 
 # Inspiration
 
- Before buying a product it's a good idea to search about it on the web. Maybe you can find it somewhere at a lower cost or better quality. So our idea was to help the customer to get other options to choose or get a clear idea about the product they are buying.
+ Before buying a product it's a good idea to search about it on the web as you can find it somewhere at a lower cost or in a better quality. So our idea was to help the customer to get other options to choose or get a clear idea about the product they are buying. The search is made more efficient and easy as the customer can either click the product image, select it from the gallery, manually type the product name or paste the product image URL to search for the desired products.
 
 # Local Setup
  
