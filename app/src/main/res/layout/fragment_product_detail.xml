@@ -42,28 +42,26 @@
             android:scaleType="centerInside"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
             app:srcCompat="@drawable/dummymouseimg" />
+
         <TextView
             android:id="@+id/productDetailProductNameTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/productDetailImageIv"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:gravity="center_horizontal"
             android:text="Product name"
             android:textColor="@color/textColor"
             android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"/>
+            android:textStyle="bold" />
 
         <ImageView
-            android:layout_marginStart="16dp"
             android:id="@+id/productDetailProductTagIv"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginTop="16dp"
-            android:layout_below="@id/productDetailProductNameTv"
-            android:src="@drawable/productdetailpricetag" />
+            android:layout_below="@id/productDetailProductNameTv" />
 
         <TextView
             android:id="@+id/productDetailProductPriceTv"
@@ -79,13 +77,13 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:layout_marginStart="16dp"
             android:id="@+id/productDetailProductDescriptionIv"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_below="@id/productDetailProductTagIv"
-            android:src="@drawable/productdetaildescription"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/productdetaildescription" />
 
         <TextView
             android:id="@+id/productDetailProductDetailTv"
@@ -93,10 +91,10 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/productDetailProductDescriptionIv"
             android:layout_marginStart="16dp"
+            android:layout_marginBottom="6dp"
             android:layout_toRightOf="@id/productDetailProductDescriptionIv"
             android:text="This is the description for Product"
             android:textColor="@color/textColor" />
-
         <Button
             android:id="@+id/buy"
             android:layout_width="160dp"
