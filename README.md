@@ -10,7 +10,7 @@
  
  <p>Good Merchant is an android application that allows customers to find the best price accessible on the web simply by clicking an image of the product or the product's     
  name/brand the customer wants to search for or select the desired image from the gallery. The customer can also do a manual search by entering the product name or by providing 
- the product image URL. Good Merchant gives aggregative information, and it will generate a list of viable channels from around the web and offer it to the user in a user-
+ the product image URL. Good Merchant gives aggregative information, and it will generate a list of viable channels from around the web and offer it to the customer in a user-
  friendly manner. After selecting a track from the list, the user may navigate straight to it.</p>
 
 <br />
@@ -32,7 +32,7 @@ The demonstration video of our Good Merchant App can be viewed by clicking on th
 
 # Features
 
- * An aesthetically designed UI for the user
+ * An aesthetically designed UI for the customer
  * Search for the desired product by either clicking its image using the camera or selecting its image from the gallery
  * Manually entering the product name or passing the URL of the product image to search for the product
  * Display of products similar to it from various e-commerce sites in the the recycler view
@@ -57,7 +57,7 @@ The demonstration video of our Good Merchant App can be viewed by clicking on th
 
 # Inspiration
 
- Before buying a product it's a good idea to search about it on the web. Maybe you can find it somewhere at a lower cost or better quality. So our idea was to help the user to get other options to choose or get a clear idea about the product they are buying.
+ Before buying a product it's a good idea to search about it on the web. Maybe you can find it somewhere at a lower cost or better quality. So our idea was to help the customer to get other options to choose or get a clear idea about the product they are buying.
 
 # Local Setup
  
@@ -70,7 +70,7 @@ The demonstration video of our Good Merchant App can be viewed by clicking on th
 
 # What's next for Good Merchant
 
- Addition of a more efficient Machine learning model which will increase the similarity between the product list and the image passed. Adding a favourites list to save the product which the customer likes using room database which will provide user the chance to refer to it later on and thus we will also be adding user authentication.
+ Addition of a more efficient Machine learning model which will increase the similarity between the product list and the image passed. Adding a favourites list to save the product which the customer likes using room database which will provide customer the chance to refer to it later on and thus we will also be adding user authentication.
  
 # Team Members
 
