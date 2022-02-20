@@ -57,7 +57,7 @@ The demonstration video of our Good Merchant can be viewed by clicking on this [
 
 # Inspiration
 
- Before buying a product it's a good idea to search about it on the web. Maybe you can find it somewhere at a lower cost or better quality. So our idea was to help the user to get other options to choose or get an idea about the product they are buying.
+ Before buying a product it's a good idea to search about it on the web. Maybe you can find it somewhere at a lower cost or better quality. So our idea was to help the user to get other options to choose or get a clear idea about the product they are buying.
 
 # Local Setup
  
@@ -70,7 +70,7 @@ The demonstration video of our Good Merchant can be viewed by clicking on this [
 
 # What's next for Good Merchant
 
- Addition of a more efficient Machine learning model which will increase the similarity between the product list and the image passed. Adding a favourites list to save the product which the customer likes using room database which will provide user the chance to save a product and refer to it later on and thus also adding user authentication.
+ Addition of a more efficient Machine learning model which will increase the similarity between the product list and the image passed. Adding a favourites list to save the product which the customer likes using room database which will provide user the chance to refer to it later on and thus also adding user authentication.
  
 # Team Members
 
