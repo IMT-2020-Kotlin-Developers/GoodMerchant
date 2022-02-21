@@ -33,7 +33,7 @@ The demonstration video of our Good Merchant App can be viewed by clicking on th
 # Features
 
  * An aesthetically designed UI for the customer
- * Search for the desired product by either clicking its image using the camera or selecting its image from the gallery
+ * Search for the desired product by either clicking its image using the camera or selecting its image from the gallery. Here is a list of labels that the iamge labeling model can detect -> [labels](https://github.com/sekocoder/GoodMerchant/files/8107045/Untitled.document.2.pdf)
  * Manually entering the product name or passing the URL of the product image to search for the product
  * Display of products similar to it sorted by price from various e-commerce sites in the form of a scrollable list 
  * Detailed page of every product
